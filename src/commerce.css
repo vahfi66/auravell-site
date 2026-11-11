@@ -1,0 +1,494 @@
+.commerce-dialog {
+  --commerce-surface: #101112;
+  --commerce-ink: #f3f1ec;
+  --commerce-muted: #b1b5ba;
+  --commerce-rule: #34363a;
+  --commerce-ease: cubic-bezier(0.23, 1, 0.32, 1);
+  --commerce-slide: 150ms;
+  display: none;
+  position: fixed;
+  inset: 0 0 0 auto;
+  flex-direction: column;
+  width: min(100%, 516px);
+  max-width: none;
+  height: 100vh;
+  height: 100dvh;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+  border-inline-start: 1px solid var(--commerce-rule);
+  background: var(--commerce-surface);
+  color: var(--commerce-ink);
+  color-scheme: dark;
+  font-family: Onest, sans-serif;
+  pointer-events: none;
+  transform: translateX(100%);
+  transition: transform var(--commerce-slide) var(--commerce-ease),
+    display var(--commerce-slide) allow-discrete,
+    overlay var(--commerce-slide) allow-discrete;
+}
+
+.commerce-dialog[open] {
+  --commerce-slide: 230ms;
+  display: flex;
+  pointer-events: auto;
+  transform: translateX(0);
+}
+
+.commerce-dialog[data-instant] {
+  --commerce-slide: 0ms;
+}
+
+.commerce-dialog::backdrop {
+  background-color: rgb(0 0 0 / 0);
+  pointer-events: none;
+  transition: background-color var(--commerce-slide) var(--commerce-ease),
+    display var(--commerce-slide) allow-discrete,
+    overlay var(--commerce-slide) allow-discrete;
+}
+
+.commerce-dialog[open]::backdrop {
+  background-color: rgb(0 0 0 / 0.72);
+  pointer-events: auto;
+}
+
+@starting-style {
+  .commerce-dialog[open] {
+    transform: translateX(100%);
+  }
+
+  .commerce-dialog[open]::backdrop {
+    background-color: rgb(0 0 0 / 0);
+  }
+}
+
+html:has(.commerce-dialog[open]) {
+  overflow: hidden;
+}
+
+.commerce-dialog [hidden] {
+  display: none !important;
+}
+
+.commerce-header {
+  flex: none;
+  position: relative;
+  padding: 30px 64px 24px 30px;
+  border-bottom: 1px solid var(--commerce-rule);
+}
+
+.commerce-heading {
+  margin: 0;
+  font-family: Prata, Georgia, serif;
+  font-size: clamp(28px, 6vw, 39px);
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: -0.035em;
+}
+
+.commerce-demo {
+  margin: 10px 0 0;
+  color: var(--commerce-muted);
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.commerce-scroll {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  overscroll-behavior: contain;
+  scroll-padding: 20px;
+}
+
+.commerce-panel {
+  padding-inline: 30px;
+}
+
+.commerce-dialog button {
+  font: inherit;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+.commerce-dialog button:disabled {
+  cursor: default;
+}
+
+.commerce-dialog :is(a, button, input, summary, .commerce-heading):focus-visible {
+  outline: 2px solid #cbd6e2;
+  outline-offset: 3px;
+}
+
+.commerce-icon-button,
+.commerce-text-button,
+.commerce-primary,
+.commerce-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 44px;
+  margin: 0;
+  border: 1px solid transparent;
+  border-radius: 0;
+  background: transparent;
+  color: inherit;
+  transition: background-color 150ms ease, color 150ms ease, border-color 150ms ease,
+    transform 140ms var(--commerce-ease);
+}
+
+.commerce-dialog :is(.commerce-primary, .commerce-secondary, .commerce-icon-button):not(:disabled):active {
+  transform: scale(0.975);
+}
+
+.commerce-icon-button {
+  width: 44px;
+  padding: 0;
+}
+
+.commerce-close {
+  position: absolute;
+  inset: 22px 20px auto auto;
+  border-color: var(--commerce-rule);
+}
+
+.commerce-text-button {
+  justify-content: flex-start;
+  padding: 0;
+  color: var(--commerce-muted);
+}
+
+.commerce-back {
+  margin: -10px 0 5px;
+}
+
+.commerce-primary,
+.commerce-secondary {
+  width: 100%;
+  min-height: 52px;
+  padding: 11px 15px;
+  text-align: center;
+  text-decoration: none;
+}
+
+.commerce-primary {
+  background-color: var(--commerce-ink);
+  color: #121315;
+}
+
+.commerce-secondary {
+  border-color: #5a5d62;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .commerce-icon-button:not(:disabled):hover,
+  .commerce-secondary:hover {
+    border-color: #85878c;
+    background-color: #202123;
+  }
+
+  .commerce-text-button:hover,
+  .commerce-terms summary:hover {
+    color: var(--commerce-ink);
+  }
+
+  .commerce-primary:hover {
+    background-color: #d5dae0;
+  }
+}
+
+.commerce-items {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.commerce-item {
+  display: grid;
+  grid-template-columns: 88px minmax(0, 1fr);
+  align-items: start;
+  gap: 20px;
+  padding-block: 23px;
+  border-bottom: 1px solid var(--commerce-rule);
+}
+
+.commerce-item:last-child {
+  border-bottom: 0;
+}
+
+.commerce-thumb {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1;
+  object-fit: cover;
+  background: #17181a;
+}
+
+.commerce-item-name {
+  margin: 0;
+  color: var(--commerce-ink);
+  font-family: Prata, Georgia, serif;
+  font-size: 19px;
+  font-weight: 400;
+  line-height: 1.35;
+}
+
+.commerce-item-metal,
+.commerce-item-engraving {
+  margin: 5px 0 0;
+  color: var(--commerce-muted);
+  font-size: 13px;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+
+.commerce-line-price {
+  display: block;
+  margin-top: 9px;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.commerce-item-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 16px;
+  margin-top: 11px;
+}
+
+.commerce-quantity {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--commerce-rule);
+}
+
+.commerce-quantity button:disabled {
+  color: #757980;
+}
+
+.commerce-quantity-value {
+  min-width: 30px;
+  padding-inline: 4px;
+  text-align: center;
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+}
+
+.commerce-dialog .commerce-remove {
+  font-size: 13px;
+}
+
+.commerce-footer {
+  flex: none;
+  padding: 20px 30px max(24px, env(safe-area-inset-bottom));
+  border-top: 1px solid var(--commerce-rule);
+}
+
+.commerce-subtotal,
+.commerce-checkout-total {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: baseline;
+  color: var(--commerce-muted);
+  font-size: 14px;
+}
+
+.commerce-subtotal strong,
+.commerce-checkout-total strong {
+  color: var(--commerce-ink);
+  font-size: 21px;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+}
+
+.commerce-subtotal {
+  margin-bottom: 16px;
+}
+
+.commerce-empty,
+.commerce-success {
+  padding-block: 36px;
+}
+
+.commerce-empty p,
+.commerce-success p {
+  margin: 0 0 22px;
+  color: var(--commerce-muted);
+  line-height: 1.55;
+}
+
+.commerce-form {
+  display: grid;
+  gap: 16px;
+  padding-block: 12px max(28px, env(safe-area-inset-bottom));
+}
+
+.commerce-dialog .commerce-fill {
+  justify-self: start;
+  width: auto;
+  min-height: 44px;
+  margin-bottom: -4px;
+  padding: 7px 13px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.commerce-field {
+  display: grid;
+  align-content: start;
+  gap: 6px;
+  min-width: 0;
+}
+
+.commerce-field label {
+  font-size: 14px;
+}
+
+.commerce-field input {
+  width: 100%;
+  min-width: 0;
+  min-height: 48px;
+  padding: 10px 12px;
+  border: 1px solid #5a5d62;
+  border-radius: 0;
+  background-color: #18191b;
+  color: var(--commerce-ink);
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+}
+
+.commerce-field input::placeholder {
+  color: #92969e;
+  font-style: italic;
+  font-weight: 400;
+  opacity: 1;
+}
+
+.commerce-field-pair {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.commerce-consents {
+  display: grid;
+  gap: 4px;
+  margin-top: 2px;
+}
+
+.commerce-consent {
+  display: grid;
+  grid-template-columns: 20px 1fr;
+  align-items: start;
+  gap: 11px;
+  min-height: 44px;
+  padding-block: 9px;
+  color: var(--commerce-muted);
+  font-size: 13px;
+  line-height: 1.5;
+  cursor: pointer;
+}
+
+.commerce-consent input {
+  appearance: auto;
+  width: 20px;
+  height: 20px;
+  margin: 0;
+  accent-color: var(--commerce-ink);
+  cursor: pointer;
+}
+
+.commerce-error {
+  margin: 0;
+  color: #ffc4ba;
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.commerce-consent-error {
+  margin: 0 0 8px 31px;
+}
+
+.commerce-dialog input[aria-invalid="true"] {
+  border-color: #f49f94;
+}
+
+.commerce-consent input[aria-invalid="true"] {
+  outline: 1px solid #f49f94;
+}
+
+.commerce-terms {
+  margin-top: -6px;
+  border-bottom: 1px solid var(--commerce-rule);
+}
+
+.commerce-terms details {
+  border-top: 1px solid var(--commerce-rule);
+}
+
+.commerce-terms summary {
+  min-height: 44px;
+  padding-block: 12px;
+  color: var(--commerce-muted);
+  font-size: 13px;
+  line-height: 1.5;
+  cursor: pointer;
+}
+
+.commerce-terms p {
+  margin: 0 0 14px;
+  color: var(--commerce-muted);
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.commerce-checkout-total {
+  padding-top: 2px;
+}
+
+@media (max-width: 540px) {
+  .commerce-dialog {
+    border-inline-start: 0;
+  }
+
+  .commerce-header {
+    padding: 24px 66px 19px 20px;
+  }
+
+  .commerce-close {
+    inset: 15px 16px auto auto;
+  }
+
+  .commerce-panel,
+  .commerce-footer {
+    padding-inline: 20px;
+  }
+
+  .commerce-item {
+    grid-template-columns: 72px minmax(0, 1fr);
+    gap: 14px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .commerce-dialog,
+  .commerce-dialog[open] {
+    --commerce-slide: 0ms;
+  }
+
+  .commerce-dialog :is(a, button) {
+    transition: none;
+  }
+
+  .commerce-dialog :is(.commerce-primary, .commerce-secondary, .commerce-icon-button):not(:disabled):active {
+    transform: none;
+  }
+}
