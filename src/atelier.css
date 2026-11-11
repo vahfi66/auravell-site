@@ -98,7 +98,21 @@
 }
 .engraving-reference { margin: 0; }
 .engraving-reference figcaption { margin-top: 11px; }
-.engraving-form { margin-top: 23px; }
+.engraving-form {
+  --engraving-control-height: 46px;
+  --engraving-field-gap: 6px;
+  --engraving-field-spacing: 14px;
+  --engraving-quote-padding: 10px;
+  margin-top: 23px;
+}
+
+/* Keep the scroll range when the model field and its price row are removed. */
+.engraving-form:has([data-engraving-model][hidden])::after {
+  display: block;
+  font-size: 14px;
+  block-size: calc(2lh + var(--engraving-control-height) + var(--engraving-field-gap) + var(--engraving-field-spacing) + 2 * var(--engraving-quote-padding) + 1px);
+  content: '';
+}
 
 .engraving-choices {
   display: grid;
@@ -131,10 +145,14 @@
 
 .engraving-choices label:has(:checked) { background: #202226; border-color: #828890; }
 .engraving-choices input { margin: 0; accent-color: #e3e4e5; }
-.engraving-field:not([hidden]) { display: grid; gap: 6px; margin-bottom: 14px; }
+.engraving-field:not([hidden]) {
+  display: grid;
+  gap: var(--engraving-field-gap);
+  margin-bottom: var(--engraving-field-spacing);
+}
 .engraving-field :is(input, select) {
   width: 100%;
-  min-height: 46px;
+  min-height: var(--engraving-control-height);
   padding: 8px 11px;
   border: 1px solid var(--facet-edge);
   border-radius: var(--facet-corners);
@@ -147,6 +165,7 @@
 .engraving-hint { margin-top: -6px; color: var(--muted); font-size: 13px; }
 .engraving-field:has([aria-invalid="true"]) + .engraving-hint { color: #eab4a8; }
 .engraving-quote { margin-block: 16px; }
+.engraving-quote > div:not([hidden]) { padding-block: var(--engraving-quote-padding); }
 .engraving-buy { width: 100%; gap: 10px; }
 
 @media (hover: hover) {
