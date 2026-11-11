@@ -204,7 +204,7 @@ export function createCommerce({ products, formatPrice }) {
   function updateBadge() {
     const count = lines.reduce((total, line) => total + line.quantity, 0);
     badge.textContent = count;
-    cartButton.setAttribute("aria-label", `Корзина, количество изделий — ${count}`);
+    cartButton.setAttribute("aria-label", `Корзина ${count}`);
   }
 
   function persist() {
