@@ -1,3 +1,5 @@
+const imageBase = `${import.meta.env.BASE_URL}images/`;
+
 export const engravingRates = {
   Кольца: 5_000,
   Браслеты: 3_000,
@@ -30,7 +32,7 @@ export const products = [
     metal: 'Белое золото',
     stone: 'Бриллиант',
     price: 84_000,
-    image: '/images/eclat.webp',
+    image: `${imageBase}eclat.webp`,
     description: 'Круглый бриллиант в открытой оправе на гладком кольце из белого золота.',
   },
   {
@@ -41,7 +43,7 @@ export const products = [
     metal: 'Серебро',
     stone: 'Без камня',
     price: 28_000,
-    image: '/images/ligne.webp',
+    image: `${imageBase}ligne.webp`,
     description: 'Открытый браслет из серебра с матовой шлифовкой и скруглёнными краями.',
   },
   {
@@ -52,7 +54,7 @@ export const products = [
     metal: 'Серебро',
     stone: 'Лунный камень',
     price: 19_000,
-    image: '/images/lune.webp',
+    image: `${imageBase}lune.webp`,
     description: 'Лунный камень с холодным голубым отблеском в серебряной оправе.',
   },
   {
@@ -63,7 +65,7 @@ export const products = [
     metal: 'Серебро',
     stone: 'Без камня',
     price: 24_000,
-    image: '/images/onde.webp',
+    image: `${imageBase}onde.webp`,
     description: 'Серебряное кольцо с волнообразным профилем и зеркальной полировкой.',
   },
   {
@@ -74,7 +76,7 @@ export const products = [
     metal: 'Белое золото',
     stone: 'Бриллиант',
     price: 76_000,
-    image: '/images/sillage.webp',
+    image: `${imageBase}sillage.webp`,
     description: 'Бриллианты в отдельных оправах образуют непрерывную линию на колье из белого золота.',
   },
   {
@@ -85,7 +87,7 @@ export const products = [
     metal: 'Белое золото',
     stone: 'Бриллиант',
     price: 62_000,
-    image: '/images/halo.webp',
+    image: `${imageBase}halo.webp`,
     description: 'Пара серёг из белого золота с круглыми бриллиантами.',
   },
 ];
@@ -97,7 +99,7 @@ export const perfume = {
   name: 'Sillage Noir',
   price: 18_900,
   detail: 'Парфюмерная вода · 50 мл',
-  image: '/images/sillage-noir.webp',
+  image: `${imageBase}sillage-noir.webp`,
 };
 
 export const engravingServices = [
@@ -107,6 +109,6 @@ export const engravingServices = [
   ...service,
   price: 0,
   detail: 'Услуга гравировки',
-  image: '/images/engraving-720.webp',
+  image: `${imageBase}engraving-720.webp`,
   requiresEngraving: true,
 }));

@@ -41,7 +41,7 @@
 }
 
 .facet-mark::after { width: 5px; height: 5px; }
-.hero-action { min-width: 218px; }
+.hero-action { justify-content: center; }
 
 .perfume-section {
   border-block-start: 1px solid var(--line);
@@ -92,7 +92,10 @@
 .engraving-quote dd, .perfume-buy strong, .engraving-buy strong { white-space: nowrap; font-variant-numeric: tabular-nums; }
 .perfume-buy { min-width: min(100%, 252px); }
 
-.engraving-inner { grid-template-columns: minmax(0, 1.13fr) minmax(0, 1fr); }
+.engraving-inner {
+  grid-template-columns: minmax(0, 1.13fr) minmax(0, 1fr);
+  align-items: start;
+}
 .engraving-reference { margin: 0; }
 .engraving-reference figcaption { margin-top: 11px; }
 .engraving-form { margin-top: 23px; }
