@@ -22,10 +22,13 @@
     <header class="site-header">
       <div class="wrap header-inner">
         <a href="#top" class="wordmark" aria-label="Auravell, в начало">Auravell</a>
-        <nav class="site-nav" aria-label="Главная навигация">
-          <a href="#catalog">Каталог</a>
-          <a class="nav-perfume" href="#perfume">Парфюм</a>
-          <a href="#engraving">Гравировка</a>
+        <button class="site-menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+          Меню
+        </button>
+        <nav class="site-nav" id="site-nav" aria-label="Главная навигация">
+          <a href="#catalog" tabindex="0">Каталог</a>
+          <a href="#perfume" tabindex="0">Парфюм</a>
+          <a href="#engraving" tabindex="0">Гравировка</a>
         </nav>
         <button type="button" class="cart-button" id="cart-button" aria-label="Корзина 0" aria-haspopup="dialog">
           <svg width="19" height="20" viewBox="0 0 20 21" fill="none" aria-hidden="true">
@@ -53,14 +56,14 @@
         </div>
       </section>
 
-      <section id="catalog" class="catalog-section" aria-labelledby="catalog-title">
+      <section id="catalog" class="catalog-section" aria-labelledby="catalog-title" tabindex="-1">
         <div class="wrap">
           <h2 id="catalog-title">Каталог</h2>
           <div id="catalog-content"></div>
         </div>
       </section>
 
-      <section id="perfume" class="perfume-section" aria-labelledby="perfume-title">
+      <section id="perfume" class="perfume-section" aria-labelledby="perfume-title" tabindex="-1">
         <div class="wrap perfume-inner">
           <div class="perfume-copy">
             <p class="perfume-type">Фирменный парфюм Auravell</p>
@@ -79,7 +82,7 @@
         </div>
       </section>
 
-      <section id="engraving" class="engraving-section" aria-labelledby="engraving-title">
+      <section id="engraving" class="engraving-section" aria-labelledby="engraving-title" tabindex="-1">
         <div class="wrap engraving-inner">
           <figure class="engraving-reference">
             <img class="engraving-photo" src="/images/engraving.webp" srcset="/images/engraving-720.webp 720w, /images/engraving.webp 1200w" sizes="(max-width: 720px) 90vw, (max-width: 1600px) 50vw, 740px" width="1200" height="900" loading="lazy" decoding="async" alt="Инициалы A M на внутренней стороне серебряного кольца">

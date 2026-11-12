@@ -18,7 +18,17 @@
   border-radius: var(--facet-corners);
 }
 
-.cart-button { border: 1px solid var(--line); border-radius: var(--facet-corners); padding-inline: 11px; }
+:is(.cart-button, .site-menu-toggle) {
+  border: 1px solid var(--facet-edge);
+  border-radius: var(--facet-corners);
+}
+.cart-button { padding-inline: 11px; }
+.cart-button:active, .site-menu-toggle:is(:active, [aria-expanded="true"]),
+.engraving-choices label:active { background-color: #272a2d; }
+
+:is(.action--primary, .product-detail-buy, .commerce-primary):active {
+  background-image: linear-gradient(#11121420, #11121420), var(--polished-silver);
+}
 .cart-count { border-radius: 2px 7px; }
 .catalog-category { border-radius: var(--facet-corners); }
 
@@ -168,22 +178,18 @@
 .engraving-quote > div:not([hidden]) { padding-block: var(--engraving-quote-padding); }
 .engraving-buy { width: 100%; gap: 10px; }
 
-@media (hover: hover) {
+@media (hover: hover) and (pointer: fine) {
   :is(.action--primary, .product-detail-buy, .commerce-primary):hover {
     border-color: #fff;
     background: linear-gradient(110deg, #faf9f6, #e4e7eb 54%, #f2f1ee);
     color: #08090a;
   }
-  .cart-button:hover, .engraving-choices label:hover { border-color: var(--facet-edge); }
+  :is(.cart-button, .site-menu-toggle):hover { border-color: var(--muted); }
+  .engraving-choices label:hover { border-color: var(--facet-edge); }
 }
 
 @media (max-width: 720px) {
   .perfume-inner, .engraving-inner { grid-template-columns: minmax(0, 1fr); }
   .perfume-photo { grid-row: 1; }
-  .cart-button { padding-inline: 5px; }
-}
-
-@media (max-width: 550px) {
-  .site-nav .nav-perfume { display: none; }
-  .cart-button { padding-inline: 2px; border-color: transparent; }
+  .cart-button { padding-inline: 8px; }
 }
