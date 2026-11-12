@@ -1,4 +1,4 @@
-const imageBase = `${import.meta.env.BASE_URL}images/`;
+const imageBase = `${import.meta.env?.BASE_URL ?? './'}images/`;
 
 export const engravingRates = {
   Кольца: 5_000,

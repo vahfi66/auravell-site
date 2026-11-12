@@ -1,11 +1,7 @@
-import './site.css';
-import './catalog.css';
-import './commerce.css';
-import './atelier.css';
 import { createCommerce } from './commerce.js';
 import { mountCatalog } from './catalog.js';
 import { mountEngraving } from './engraving.js';
-import { engravingServices, featuredProduct, formatPrice, perfume, products } from './products.js';
+import { engravingServices, formatPrice, perfume, products } from './products.js';
 
 const menuToggle = document.querySelector('.site-menu-toggle');
 const navigation = document.querySelector('#site-nav');
@@ -72,10 +68,6 @@ function clearTouchPress(event) {
 document.addEventListener('pointerup', clearTouchPress, { passive: true });
 document.addEventListener('pointercancel', clearTouchPress, { passive: true });
 document.addEventListener('lostpointercapture', clearTouchPress, { passive: true });
-
-const heroPrice = document.querySelector('.hero-price');
-heroPrice.textContent = formatPrice(featuredProduct.price);
-heroPrice.hidden = false;
 
 const commerce = createCommerce({ products: [...products, perfume, ...engravingServices], formatPrice });
 
