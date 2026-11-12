@@ -264,6 +264,7 @@
   overflow: hidden;
   aspect-ratio: 1.18;
   background: #111214;
+  transition: opacity 130ms ease;
 }
 
 .catalog-product-image img {
@@ -271,27 +272,35 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 220ms var(--catalog-ease), opacity 130ms ease;
+  transition: transform 220ms var(--catalog-ease);
 }
 
-.catalog-product:has(.catalog-product-button:is(:active, [data-touch-pressed])) .catalog-product-image img {
+.catalog-product:has(.catalog-product-button:is(:active, [data-touch-pressed])) .catalog-product-image {
   opacity: .8;
 }
 
-@supports (view-timeline-name: --catalog-photo) and (animation-range: entry 0% entry 45%) {
+@supports (view-timeline-name: --catalog-photo) and (animation-range: entry 0% entry 65%) {
   @media (prefers-reduced-motion: no-preference) {
     .catalog-product-image { view-timeline-name: --catalog-photo; }
     .catalog-product-image img {
       animation: catalog-photo-scroll auto linear both;
       animation-timeline: --catalog-photo;
-      animation-range: entry 0% entry 45%;
+      animation-range: entry 0% entry 65%;
     }
   }
 }
 
+@media (prefers-reduced-motion: no-preference) {
+  .catalog-grid--scroll-fallback .catalog-product-image img {
+    animation: none;
+    opacity: calc(1 - .38 * var(--photo-scroll-remaining, 0));
+    scale: calc(1 + .15 * var(--photo-scroll-remaining, 0));
+  }
+}
+
 @keyframes catalog-photo-scroll {
-  from { scale: 1.07; }
-  to { scale: 1; }
+  from { opacity: .62; scale: 1.15; }
+  to { opacity: 1; scale: 1; }
 }
 
 .catalog-product-info {

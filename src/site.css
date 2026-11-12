@@ -400,7 +400,6 @@ svg { display: block; flex: 0 0 auto; }
     inset: 0;
     object-position: center 40%;
   }
-  .m-enter .hero-visual img, .m-enter .hero-copy { animation: none; }
   .hero-copy { width: 100%; padding-block: 8px clamp(24px, 5svh, 44px); }
   .hero h1 { font-size: clamp(37px, 11.7vw, 71px); line-height: 1.1; letter-spacing: -.045em; }
   .hero h1 span { display: inline; }

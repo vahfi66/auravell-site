@@ -99,6 +99,46 @@ function revealEngravingFields(layout, fields) {
   if (overflow > 0) layout.scrollTop += overflow + 8;
 }
 
+function enablePhotoScrollFallback(grid) {
+  if (CSS.supports('view-timeline-name: --catalog-photo') &&
+      CSS.supports('animation-range: entry 0% entry 65%')) return;
+
+  const images = [...grid.querySelectorAll('.catalog-product-image')];
+  const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
+  let frame = 0;
+
+  function update() {
+    frame = 0;
+    if (reducedMotion.matches) return;
+    const viewport = document.documentElement.clientHeight;
+    const remaining = images.map((image) => {
+      const { top, height } = image.getBoundingClientRect();
+      if (!height) return null;
+      const range = Math.min(height, viewport) * .65;
+      const progress = Math.max(0, Math.min(1, (viewport - top) / range));
+      return (1 - progress).toFixed(3);
+    });
+    images.forEach((image, index) => {
+      const value = remaining[index];
+      if (value !== null && image.style.getPropertyValue('--photo-scroll-remaining') !== value) {
+        image.style.setProperty('--photo-scroll-remaining', value);
+      }
+    });
+    grid.classList.add('catalog-grid--scroll-fallback');
+  }
+
+  function schedule() {
+    if (!frame && !reducedMotion.matches) frame = requestAnimationFrame(update);
+  }
+
+  window.addEventListener('scroll', schedule, { passive: true });
+  window.addEventListener('resize', schedule);
+  reducedMotion.addEventListener('change', schedule);
+  new ResizeObserver(schedule).observe(grid);
+  update();
+  return schedule;
+}
+
 export function mountCatalog({ products, onAdd }) {
   const container = document.querySelector('#catalog-content');
   const categories = [...new Set(products.map(({ category }) => category))];
@@ -140,6 +180,7 @@ export function mountCatalog({ products, onAdd }) {
   const activeFilters = container.querySelector('.catalog-active-filters');
   const resetButton = container.querySelector('.catalog-results-bar [data-reset]');
   const empty = container.querySelector('.catalog-empty');
+  const schedulePhotoScroll = enablePhotoScrollFallback(container.querySelector('.catalog-grid'));
 
   function updateCatalog() {
     const visible = products.filter((product) => Object.entries(selected).every(([key, values]) =>
@@ -170,6 +211,7 @@ export function mountCatalog({ products, onAdd }) {
     if (count.textContent !== label) count.textContent = label;
     resetButton.hidden = !selected.category.size && !active.length;
     empty.hidden = Boolean(visible.length);
+    schedulePhotoScroll?.();
   }
 
   function closeMenus(except) {
