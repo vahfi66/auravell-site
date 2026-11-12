@@ -274,7 +274,7 @@
   transition: transform 220ms var(--catalog-ease), opacity 130ms ease;
 }
 
-.catalog-product:has(.catalog-product-button:active) .catalog-product-image img {
+.catalog-product:has(.catalog-product-button:is(:active, [data-touch-pressed])) .catalog-product-image img {
   opacity: .8;
 }
 
