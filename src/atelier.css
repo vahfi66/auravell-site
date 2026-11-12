@@ -33,25 +33,6 @@
 .cart-count { border-radius: 2px 7px; }
 .catalog-category { border-radius: var(--facet-corners); }
 
-.facet-mark {
-  position: relative;
-  display: inline-grid;
-  flex: 0 0 auto;
-  width: 16px;
-  height: 16px;
-  place-items: center;
-}
-
-.facet-mark::before, .facet-mark::after {
-  grid-area: 1 / 1;
-  width: 10px;
-  height: 10px;
-  border: 1px solid currentColor;
-  transform: rotate(45deg);
-  content: '';
-}
-
-.facet-mark::after { width: 5px; height: 5px; }
 .hero-action { justify-content: center; }
 
 .perfume-section {

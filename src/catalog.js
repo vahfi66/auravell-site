@@ -42,7 +42,6 @@ function productCard(product) {
         </h3>
         <span class="catalog-product-price" id="price-${product.id}">${formatPrice(product.price)}</span>
         <span class="catalog-product-spec" id="spec-${product.id}">${specifications}</span>
-        <span class="catalog-product-mark facet-mark" aria-hidden="true"></span>
       </div>
     </article>`;
 }

@@ -60,6 +60,7 @@
   color: var(--paper);
   font: 400 16px/1.5 var(--font-interface);
   scroll-padding-top: var(--header-height);
+  scroll-behavior: smooth;
 }
 
 *, *::before, *::after { box-sizing: border-box; }
