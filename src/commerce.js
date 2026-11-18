@@ -76,6 +76,14 @@ function makeDialog() {
       </div>
       <div class="commerce-panel" data-panel="checkout" hidden>
         <form class="commerce-form" method="dialog" autocomplete="off" novalidate>
+          <div class="commerce-field">
+            <label for="demo-pickup">Пункт выдачи (демо)</label>
+            <select id="demo-pickup" name="pickup">
+              <option>Москва · Тверская улица</option>
+              <option>Санкт-Петербург · Невский проспект</option>
+              <option>Казань · улица Баумана</option>
+            </select>
+          </div>
           <button class="commerce-secondary commerce-fill" type="button" data-commerce="fill">
             Подставить тестовые данные
           </button>
@@ -108,6 +116,7 @@ function makeDialog() {
       </div>
       <div class="commerce-panel commerce-success" data-panel="success" hidden>
         <p>Оплата прошла в деморежиме.</p>
+        <p data-pickup-summary></p>
         <a class="commerce-primary" href="#catalog" data-commerce="catalog">Вернуться в каталог</a>
       </div>
     </div>
@@ -359,6 +368,7 @@ export function createCommerce({ products, formatPrice }) {
       fields[invalid[0]].focus();
       return;
     }
+    dialog.querySelector("[data-pickup-summary]").textContent = `Пункт выдачи (демо): ${form.elements.pickup.value}`;
     lines = [];
     persist();
     renderCart();

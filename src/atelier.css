@@ -33,6 +33,24 @@
 .cart-count { border-radius: 2px 7px; }
 .catalog-category { border-radius: var(--facet-corners); }
 
+.catalog-header-actions {
+  display: flex;
+  align-items: center;
+  justify-self: end;
+  gap: 10px;
+}
+
+.catalog-home-link {
+  justify-content: center;
+  min-height: 44px;
+  padding-inline: 13px;
+  border-color: var(--facet-edge);
+  border-radius: var(--facet-corners);
+  white-space: nowrap;
+}
+
+.catalog-home-link:is(:active, [data-touch-pressed]) { background-color: #272a2d; }
+
 .hero-action { justify-content: center; }
 
 .perfume-section {
@@ -167,6 +185,7 @@
     color: #08090a;
   }
   :is(.cart-button, .site-menu-toggle):hover { border-color: var(--muted); }
+  .catalog-home-link:hover { background-color: #1d1f22; }
   .engraving-choices label:hover { border-color: var(--facet-edge); }
 }
 
@@ -174,4 +193,16 @@
   .perfume-inner, .engraving-inner { grid-template-columns: minmax(0, 1fr); }
   .perfume-photo { grid-row: 1; }
   .cart-button { padding-inline: 8px; }
+  .catalog-header-actions { gap: 6px; }
+  .catalog-home-link { min-height: 46px; padding-inline: 9px; font-size: 13px; }
+}
+
+@media (max-width: 380px) {
+  .site-header:has(.catalog-header-actions) { --gutter: 12px; }
+  .header-inner:has(.catalog-header-actions) { gap: 6px; }
+  .header-inner:has(.catalog-header-actions) .wordmark { font-size: 22px; }
+  .header-inner:has(.catalog-header-actions) .site-menu-toggle { padding-inline: 7px; font-size: 12px; }
+  .header-inner:has(.catalog-header-actions) .site-menu-icon { display: none; }
+  .catalog-home-link { padding-inline: 7px; font-size: 12px; }
+  .catalog-header-actions .cart-button { gap: 4px; padding-inline: 6px; }
 }

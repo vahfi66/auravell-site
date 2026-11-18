@@ -279,30 +279,6 @@
   opacity: .8;
 }
 
-@supports (view-timeline-name: --catalog-photo) and (animation-range: entry 0% entry 65%) {
-  @media (prefers-reduced-motion: no-preference) {
-    .catalog-product-image { view-timeline-name: --catalog-photo; }
-    .catalog-product-image img {
-      animation: catalog-photo-scroll auto linear both;
-      animation-timeline: --catalog-photo;
-      animation-range: entry 0% entry 65%;
-    }
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .catalog-grid--scroll-fallback .catalog-product-image img {
-    animation: none;
-    opacity: calc(1 - .38 * var(--photo-scroll-remaining, 0));
-    scale: calc(1 + .15 * var(--photo-scroll-remaining, 0));
-  }
-}
-
-@keyframes catalog-photo-scroll {
-  from { opacity: .62; scale: 1.15; }
-  to { opacity: 1; scale: 1; }
-}
-
 .catalog-product-info {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;

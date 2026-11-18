@@ -31,6 +31,7 @@ export const products = [
     type: 'Кольцо',
     metal: 'Белое золото',
     stone: 'Бриллиант',
+    stoneWeight: '0,50 карата',
     price: 84_000,
     image: `${imageBase}eclat.webp`,
     description: 'Круглый бриллиант в открытой оправе на гладком кольце из белого золота.',

@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="ru" data-type="product" data-radius="sharp" data-buttons="solid">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#08090a">
+    <meta name="page-type" content="product">
+    <meta name="site-kind" content="other">
+    <meta name="description" content="Каталог Auravell. Украшения из серебра и белого золота, парфюм Sillage Noir и гравировка на кольцах и браслетах.">
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link rel="preload" href="/fonts/prata-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/prata-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="/src/site.css">
+    <link rel="stylesheet" href="/src/catalog.css">
+    <link rel="stylesheet" href="/src/commerce.css">
+    <link rel="stylesheet" href="/src/atelier.css">
+    <title>Каталог Auravell — украшения, парфюм и гравировка</title>
+  </head>
+  <body id="top">
+    <a class="skip-link" href="#main">К основному содержанию</a>
+    <header class="site-header">
+      <div class="wrap header-inner">
+        <a href="./" class="wordmark" aria-label="Auravell, главная">Auravell</a>
+        <button class="site-menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+          Меню
+          <span class="site-menu-icon" aria-hidden="true"></span>
+        </button>
+        <nav class="site-nav" id="site-nav" aria-label="Разделы каталога" inert>
+          <div class="site-nav-links">
+            <a href="#catalog">Украшения</a>
+            <a href="#perfume">Парфюм</a>
+            <a href="#engraving">Гравировка</a>
+          </div>
+          <a class="action site-nav-cta" href="./">На главную</a>
+        </nav>
+        <div class="catalog-header-actions">
+          <a class="action catalog-home-link" href="./">На главную</a>
+          <button type="button" class="cart-button" id="cart-button" aria-label="Корзина 0" aria-haspopup="dialog">
+            <svg width="19" height="20" viewBox="0 0 20 21" fill="none" aria-hidden="true">
+              <path d="M3.6 7h12.8l.9 11H2.7l.9-11Z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/>
+              <path d="M7.2 8V5.4a2.8 2.8 0 1 1 5.6 0V8" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+            </svg>
+            <span class="cart-label">Корзина</span>
+            <span class="cart-count" data-cart-count aria-hidden="true">0</span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main id="main" tabindex="-1">
+      <section id="catalog" class="catalog-section" aria-labelledby="catalog-title" tabindex="-1">
+        <div class="wrap">
+          <h1 id="catalog-title">Каталог</h1>
+          <div id="catalog-content"></div>
+        </div>
+      </section>
+
+      <section id="perfume" class="perfume-section" aria-labelledby="perfume-title" tabindex="-1">
+        <div class="wrap perfume-inner">
+          <div class="perfume-copy">
+            <p class="perfume-type">Фирменный парфюм Auravell</p>
+            <h2 id="perfume-title">Sillage Noir</h2>
+            <p class="perfume-volume">Парфюмерная вода · 50 мл</p>
+            <dl class="perfume-notes" aria-label="Ноты аромата">
+              <div><dt>Верхние ноты</dt><dd>Бергамот, чёрный чай</dd></div>
+              <div><dt>Ноты сердца</dt><dd>Ирис, кедр</dd></div>
+              <div><dt>Базовые ноты</dt><dd>Ладан, ветивер</dd></div>
+            </dl>
+            <button class="action action--primary perfume-buy" type="button" aria-describedby="perfume-title">
+              <span>В корзину</span><strong data-perfume-price></strong>
+            </button>
+          </div>
+          <img class="perfume-photo" src="/images/sillage-noir.webp" width="1200" height="900" loading="lazy" decoding="async" alt="Чёрный флакон Sillage Noir с серебристой надписью">
+        </div>
+      </section>
+
+      <section id="engraving" class="engraving-section" aria-labelledby="engraving-title" tabindex="-1">
+        <div class="wrap engraving-inner">
+          <figure class="engraving-reference">
+            <img class="engraving-photo" src="/images/engraving.webp" srcset="/images/engraving-720.webp 720w, /images/engraving.webp 1200w" sizes="(max-width: 720px) 90vw, (max-width: 1600px) 50vw, 740px" width="1200" height="900" loading="lazy" decoding="async" alt="Инициалы A M на внутренней стороне серебряного кольца">
+            <figcaption>Пример гравировки</figcaption>
+          </figure>
+          <div class="engraving-copy">
+            <h2 id="engraving-title">Гравировка</h2>
+            <form class="engraving-form" id="engraving-form">
+              <fieldset class="engraving-choices">
+                <legend>Чьё украшение?</legend>
+                <label><input type="radio" name="ownership" value="brand" checked>Из Auravell</label>
+                <label><input type="radio" name="ownership" value="own">Своё</label>
+              </fieldset>
+              <fieldset class="engraving-choices">
+                <legend>Тип изделия</legend>
+                <label><input type="radio" name="category" value="Кольца" checked>Кольцо</label>
+                <label><input type="radio" name="category" value="Браслеты">Браслет</label>
+              </fieldset>
+              <label class="engraving-field" data-engraving-model>Модель
+                <select name="model"></select>
+              </label>
+              <label class="engraving-field">Текст гравировки
+                <input type="text" name="inscription" required placeholder="Например, А М" autocomplete="off" spellcheck="false" aria-describedby="engraving-hint">
+              </label>
+              <p id="engraving-hint" class="engraving-hint">Русские и английские буквы, пробелы бесплатны.</p>
+              <dl class="engraving-quote">
+                <div data-engraving-base><dt>Украшение</dt><dd></dd></div>
+                <div><dt data-engraving-count>Гравировка</dt><dd data-engraving-fee></dd></div>
+              </dl>
+              <button class="action action--primary engraving-buy" type="submit">
+                <span data-engraving-action>В корзину</span><strong data-engraving-total></strong>
+              </button>
+              <p class="catalog-sr-only" data-engraving-announcement role="status"></p>
+            </form>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="wrap footer-inner">
+        <a href="./" class="wordmark" aria-label="Auravell, главная">Auravell</a>
+        <p>Демонстрационный магазин</p>
+        <a class="back-to-top" href="#top">Наверх <span aria-hidden="true">↑</span></a>
+      </div>
+    </footer>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

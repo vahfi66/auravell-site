@@ -6,46 +6,44 @@
     <meta name="theme-color" content="#08090a">
     <meta name="page-type" content="product">
     <meta name="site-kind" content="other">
-    <meta name="description" content="Auravell — украшения из серебра и белого золота. Выберите изделие и добавьте гравировку на кольцо или браслет.">
+    <meta name="description" content="Auravell — ювелирный интернет-магазин. Кольца, серьги и браслеты из серебра и белого золота, гравировка и парфюм Sillage Noir.">
     <meta property="og:title" content="Auravell — ювелирные украшения">
-    <meta property="og:description" content="Серебро и белое золото. Кольца и браслеты с гравировкой.">
+    <meta property="og:description" content="Украшения из серебра и белого золота. Гравировка на кольцах и браслетах.">
     <meta property="og:image" content="https://vahfi66.github.io/auravell-site/images/hero-ring.webp">
     <meta property="og:type" content="website">
     <link rel="icon" href="/favicon.svg" type="image/svg+xml">
     <link rel="preload" href="/fonts/prata-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="/fonts/prata-latin.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="/src/site.css">
-    <link rel="stylesheet" href="/src/catalog.css">
-    <link rel="stylesheet" href="/src/commerce.css">
     <link rel="stylesheet" href="/src/atelier.css">
+    <link rel="stylesheet" href="/src/home.css">
     <title>Auravell — ювелирные украшения</title>
   </head>
-  <body id="top">
+  <body id="top" class="home">
     <a class="skip-link" href="#main">К основному содержанию</a>
     <header class="site-header">
       <div class="wrap header-inner">
-        <a href="#top" class="wordmark" aria-label="Auravell, в начало">Auravell</a>
+        <a href="./" class="wordmark" aria-label="Auravell, главная">Auravell</a>
         <button class="site-menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
           Меню
+          <span class="site-menu-icon" aria-hidden="true"></span>
         </button>
-        <nav class="site-nav" id="site-nav" aria-label="Главная навигация">
-          <a href="#catalog" tabindex="0">Каталог</a>
-          <a href="#perfume" tabindex="0">Парфюм</a>
-          <a href="#engraving" tabindex="0">Гравировка</a>
+        <nav class="site-nav" id="site-nav" aria-label="Разделы главной" inert>
+          <div class="site-nav-links">
+            <a href="#hero">То самое кольцо</a>
+            <a href="#about">Об Auravell</a>
+            <a href="#workshop">Точность ручной работы</a>
+            <a href="#engraving">Гравировка</a>
+            <a href="#perfume">Парфюм</a>
+            <a href="#delivery">Заказ и доставка</a>
+          </div>
+          <a class="action site-nav-cta" href="./catalog.html">Перейти в каталог</a>
         </nav>
-        <button type="button" class="cart-button" id="cart-button" aria-label="Корзина 0" aria-haspopup="dialog">
-          <svg width="19" height="20" viewBox="0 0 20 21" fill="none" aria-hidden="true">
-            <path d="M3.6 7h12.8l.9 11H2.7l.9-11Z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/>
-            <path d="M7.2 8V5.4a2.8 2.8 0 1 1 5.6 0V8" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
-          </svg>
-          <span class="cart-label">Корзина</span>
-          <span class="cart-count" data-cart-count aria-hidden="true">0</span>
-        </button>
       </div>
     </header>
 
     <main id="main" tabindex="-1">
-      <section class="hero hero--photo" aria-labelledby="hero-title" data-enter data-tone="dark" data-calm="left" data-box="none">
+      <section class="hero hero--photo" id="hero" aria-labelledby="hero-title" tabindex="-1" data-tone="dark" data-calm="left" data-box="none">
         <picture class="hero-visual">
           <source media="(max-width: 500px) and (orientation: portrait)" srcset="/images/hero-ring-portrait-720.webp 720w, /images/hero-ring-portrait.webp 1024w" sizes="100vw">
           <source media="(max-width: 980px) and (max-height: 500px) and (orientation: landscape)" srcset="/images/hero-ring-mobile-720.webp 720w, /images/hero-ring-mobile.webp 940w" sizes="52vw">
@@ -54,86 +52,91 @@
         </picture>
         <div class="wrap hero-inner">
           <div class="hero-copy">
-            <h1 id="hero-title"><span>Кольцо</span> <span lang="fr">Éclat</span></h1>
-            <p class="hero-material">Белое золото · Бриллиант <span class="hero-price">{{featured-price}}</span></p>
-            <a class="action action--primary hero-action" href="#catalog">Смотреть каталог</a>
+            <h1 id="hero-title"><span>То самое</span> <span>кольцо</span></h1>
+            <p class="hero-caption">Кольцо <span lang="fr">Éclat</span> <span aria-hidden="true">·</span> {{featured-price}}</p>
+            <a class="action action--primary hero-action" href="./catalog.html">Смотреть каталог</a>
           </div>
         </div>
       </section>
 
-      <section id="catalog" class="catalog-section" aria-labelledby="catalog-title" tabindex="-1">
+      <section class="home-scene home-scene--editorial home-scene--about" id="about" aria-labelledby="about-title" tabindex="-1">
+        <picture class="home-about-background">
+          <source media="(max-width: 980px) and (orientation: portrait)" srcset="/images/about-auravell-portrait.webp">
+          <img class="home-scene-photo" src="/images/about-auravell.webp" alt="Серебряный браслет Ligne и подвеска Lune с лунным камнем на тёмном сланце" width="1672" height="941" loading="lazy" decoding="async">
+        </picture>
+        <h2 class="wrap" id="about-title">Об Auravell</h2>
+        <div class="wrap home-scene-copy">
+          <p>Auravell — ювелирный интернет-магазин. В каталоге есть кольца, серьги, браслеты, подвески и колье из серебра и белого золота.</p>
+          <p>Если вы ищете украшение к тому, что уже носите, начните с металла и камня. К серебряному кольцу можно подобрать подвеску <span lang="fr">Lune</span> с голубоватым отблеском лунного камня. Если хочется одного заметного акцента, у <span lang="fr">Éclat</span> эту роль играет круглый бриллиант в открытой оправе.</p>
+          <p>Для подарка можно выбрать серебряный браслет <span lang="fr">Ligne</span> с матовой отделкой и добавить имя или инициалы. Стоимость надписи видна сразу, пока вы вводите текст.</p>
+          <a class="action action--primary" href="./catalog.html">Смотреть украшения</a>
+        </div>
+      </section>
+
+      <section class="home-workshop" id="workshop" aria-labelledby="workshop-title" tabindex="-1">
         <div class="wrap">
-          <h2 id="catalog-title">Каталог</h2>
-          <div id="catalog-content"></div>
+          <h2 id="workshop-title">Точность ручной работы</h2>
+          <div class="home-workshop-grid">
+            <article class="home-craft home-craft--eclat">
+              <img class="home-craft-photo" src="/images/eclat-diamond.webp" alt="Рука держит круглый бриллиант пинцетом перед ювелирной лупой" width="1200" height="800" loading="lazy" decoding="async" data-source="illustration">
+              <div class="home-craft-copy">
+                <h3><span lang="fr">Éclat</span></h3>
+                <p class="home-craft-detail">Белое золото · Бриллиант {{featured-stone-weight}}</p>
+                <p>Перед закрепкой мастер поворачивает бриллиант под лупой и рассматривает грани и край камня.</p>
+              </div>
+            </article>
+            <article class="home-craft home-craft--onde">
+              <img class="home-craft-photo" src="/images/onde-polish.webp" alt="Свет ложится на скруглённую внутреннюю кромку серебряного кольца Onde" width="1200" height="800" loading="lazy" decoding="async" data-source="illustration">
+              <div class="home-craft-copy">
+                <h3><span lang="fr">Onde</span></h3>
+                <p class="home-craft-detail">Серебро · Ручная полировка</p>
+                <p>Мастер вручную полирует скруглённую кромку изнутри, чтобы кольцо гладко скользило по пальцу.</p>
+              </div>
+            </article>
+          </div>
+          <a class="action action--primary" href="./catalog.html?category=Кольца#catalog">Смотреть кольца</a>
         </div>
       </section>
 
-      <section id="perfume" class="perfume-section" aria-labelledby="perfume-title" tabindex="-1">
-        <div class="wrap perfume-inner">
-          <div class="perfume-copy">
-            <p class="perfume-type">Фирменный парфюм Auravell</p>
-            <h2 id="perfume-title">Sillage Noir</h2>
-            <p class="perfume-volume">Парфюмерная вода · 50 мл</p>
-            <dl class="perfume-notes" aria-label="Ноты аромата">
-              <div><dt>Верхние ноты</dt><dd>Бергамот, чёрный чай</dd></div>
-              <div><dt>Ноты сердца</dt><dd>Ирис, кедр</dd></div>
-              <div><dt>Базовые ноты</dt><dd>Ладан, ветивер</dd></div>
-            </dl>
-            <button class="action action--primary perfume-buy" type="button" aria-describedby="perfume-title">
-              <span>В корзину</span><strong data-perfume-price></strong>
-            </button>
-          </div>
-          <img class="perfume-photo" src="/images/sillage-noir.webp" width="1200" height="900" loading="lazy" decoding="async" alt="Чёрный флакон Sillage Noir с серебристой надписью">
+      <section class="home-scene home-scene--editorial home-scene--engraving" id="engraving" aria-labelledby="engraving-title" tabindex="-1">
+        <picture class="home-engraving-background">
+          <source media="(max-width: 720px) and (orientation: portrait)" srcset="/images/engraving-scene-portrait.webp">
+          <img class="home-scene-photo" src="/images/engraving-scene.webp" alt="" width="1672" height="941" loading="lazy" decoding="async">
+        </picture>
+        <h2 class="wrap" id="engraving-title">Гравировка</h2>
+        <div class="wrap home-scene-copy">
+          <p>Добавьте имя или инициалы на кольцо или браслет. Для надписи внутри кольца мастер подбирает размер букв под ширину ободка и располагает их вдоль изгиба.</p>
+          <a class="action action--primary" href="./catalog.html#engraving">Настроить гравировку</a>
         </div>
       </section>
 
-      <section id="engraving" class="engraving-section" aria-labelledby="engraving-title" tabindex="-1">
-        <div class="wrap engraving-inner">
-          <figure class="engraving-reference">
-            <img class="engraving-photo" src="/images/engraving.webp" srcset="/images/engraving-720.webp 720w, /images/engraving.webp 1200w" sizes="(max-width: 720px) 90vw, (max-width: 1600px) 50vw, 740px" width="1200" height="900" loading="lazy" decoding="async" alt="Инициалы A M на внутренней стороне серебряного кольца">
-            <figcaption>Пример гравировки</figcaption>
-          </figure>
-          <div class="engraving-copy">
-            <h2 id="engraving-title">Гравировка</h2>
-            <form class="engraving-form" id="engraving-form">
-              <fieldset class="engraving-choices">
-                <legend>Чьё украшение?</legend>
-                <label><input type="radio" name="ownership" value="brand" checked>Из Auravell</label>
-                <label><input type="radio" name="ownership" value="own">Своё</label>
-              </fieldset>
-              <fieldset class="engraving-choices">
-                <legend>Тип изделия</legend>
-                <label><input type="radio" name="category" value="Кольца" checked>Кольцо</label>
-                <label><input type="radio" name="category" value="Браслеты">Браслет</label>
-              </fieldset>
-              <label class="engraving-field" data-engraving-model>Модель
-                <select name="model"></select>
-              </label>
-              <label class="engraving-field">Текст гравировки
-                <input type="text" name="inscription" required placeholder="Например, А М" autocomplete="off" spellcheck="false" aria-describedby="engraving-hint">
-              </label>
-              <p id="engraving-hint" class="engraving-hint">Русские и английские буквы, пробелы бесплатны.</p>
-              <dl class="engraving-quote">
-                <div data-engraving-base><dt>Украшение</dt><dd></dd></div>
-                <div><dt data-engraving-count>Гравировка</dt><dd data-engraving-fee></dd></div>
-              </dl>
-              <button class="action action--primary engraving-buy" type="submit">
-                <span data-engraving-action>В корзину</span><strong data-engraving-total></strong>
-              </button>
-              <p class="catalog-sr-only" data-engraving-announcement role="status"></p>
-            </form>
-          </div>
+      <section class="home-scene home-scene--editorial home-scene--perfume" id="perfume" aria-labelledby="perfume-title" tabindex="-1">
+        <img class="home-scene-photo" src="/images/sillage-noir.webp" alt="Чёрный флакон Sillage Noir с серебристой надписью" width="1200" height="900" loading="lazy" decoding="async">
+        <h2 class="wrap" id="perfume-title"><span lang="fr">Sillage Noir</span></h2>
+        <div class="wrap home-scene-copy">
+          <p>Сначала бергамот и чёрный чай. Затем раскрываются ирис и кедр, а в шлейфе остаются ладан и ветивер.</p>
+          <p class="home-scene-detail">Парфюмерная вода · 50 мл</p>
+          <a class="action action--primary" href="./catalog.html#perfume">Посмотреть аромат</a>
+        </div>
+      </section>
+
+      <section class="home-scene home-scene--delivery" id="delivery" aria-labelledby="delivery-title" tabindex="-1">
+        <img class="home-scene-photo" src="/images/delivery-box.webp" alt="" width="1200" height="800" loading="lazy" decoding="async" data-source="illustration">
+        <div class="wrap home-scene-copy">
+          <h2 id="delivery-title">Заказ и доставка</h2>
+          <p>Доставляем по всей России. При оформлении выберите удобный пункт выдачи. Если добавили гравировку, проверьте надпись в корзине перед подтверждением заказа.</p>
+          <a class="action action--primary" href="./catalog.html">Перейти в каталог</a>
         </div>
       </section>
     </main>
 
     <footer class="site-footer">
       <div class="wrap footer-inner">
-        <a href="#top" class="wordmark" aria-label="Auravell, в начало">Auravell</a>
+        <a href="./" class="wordmark" aria-label="Auravell, главная">Auravell</a>
         <p>Демонстрационный магазин</p>
         <a class="back-to-top" href="#top">Наверх <span aria-hidden="true">↑</span></a>
       </div>
     </footer>
-    <script type="module" src="/src/main.js"></script>
+    <script type="module" src="/src/site.js"></script>
   </body>
 </html>
