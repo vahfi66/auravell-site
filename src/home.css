@@ -39,14 +39,13 @@
 
 .home-workshop > .wrap {
   display: grid;
-  grid-template-rows: auto 1fr auto;
+  grid-template-rows: auto 1fr;
   width: 100%;
   gap: clamp(12px, 2.6svh, 22px);
   padding-block: clamp(18px, 3svh, 33px);
 }
 
-.home-workshop h2, .home-workshop .action { margin-inline: var(--workshop-gutter); }
-.home-workshop .action { justify-self: start; }
+.home-workshop h2 { margin-inline: var(--workshop-gutter); }
 
 .home-workshop-grid {
   display: grid;
@@ -200,6 +199,17 @@
 .home-scene--about .home-scene-copy p { max-width: 48ch; }
 .home-scene--about .home-scene-copy p + p { margin-top: clamp(9px, 1.5svh, 14px); }
 
+.home-catalog-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  margin-top: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: .28em;
+}
+
 .home-engraving-background::after {
   background: linear-gradient(90deg,
       var(--ink) 39%, #08090afa 42%, #08090ae8 45%, #08090ac2 49%,
@@ -226,6 +236,19 @@
   object-fit: contain;
   object-position: right center;
   mask-image: linear-gradient(90deg, transparent 31%, #0007 51%, #000 73%), var(--chapter-edge-mask);
+}
+
+.home-perfume-action {
+  justify-content: center;
+  border-color: var(--facet-edge);
+  border-radius: var(--facet-corners);
+  background-color: #08090a80;
+}
+
+.home-perfume-action:is(:active, [data-touch-pressed]) { background-color: #272a2d; }
+
+@media (hover: hover) and (pointer: fine) {
+  .home-perfume-action:hover { background-color: #1d1f22; }
 }
 
 .home .home-scene--delivery { min-height: 0; }
@@ -284,16 +307,9 @@
     margin-top: clamp(18px, 3svh, 33px);
   }
 
-  .home-workshop-grid { grid-area: 1 / 1 / 4 / 2; }
-
-  .home-workshop .action {
-    grid-area: 3 / 1;
-    z-index: 1;
-    margin-bottom: clamp(18px, 3svh, 33px);
-  }
+  .home-workshop-grid { grid-area: 1 / 1 / 3 / 2; }
 
   .home-craft--eclat .home-craft-copy { padding-top: clamp(56px, 11svh, 108px); }
-  .home-craft--onde .home-craft-copy { padding-bottom: clamp(52px, 8svh, 82px); }
 }
 
 @media (max-width: 720px) {
@@ -306,14 +322,12 @@
   .home-scene h2 { font-size: clamp(40px, 11vw, 68px); }
 
   .home-workshop > .wrap {
-    grid-template-rows: auto auto auto;
+    grid-template-rows: auto auto;
     align-content: center;
     text-align: center;
     gap: clamp(11px, 2.3svh, 21px);
     padding-block: clamp(14px, 3svh, 30px);
   }
-
-  .home-workshop .action { justify-self: center; }
 
   .home-workshop-grid {
     grid-template-columns: minmax(0, 1fr);
