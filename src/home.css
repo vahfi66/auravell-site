@@ -42,13 +42,30 @@
 }
 
 .home .home-workshop {
+  position: relative;
+  isolation: isolate;
   display: grid;
   align-items: center;
-  background-image:
-    linear-gradient(var(--ink), #08090a26 23%, #08090a26 76%, var(--ink)),
-    url('/images/workshop-slate.webp');
-  background-position: center, 35% center;
-  background-size: cover;
+}
+
+.home-workshop::before,
+.home-workshop::after {
+  position: absolute;
+  z-index: -1;
+  width: clamp(54px, 13vw, 200px);
+  height: clamp(145px, 28%, 270px);
+  background: radial-gradient(ellipse 100% 48% at left center,
+    transparent 60%, #b7c5d113 61%, transparent 62% 75%,
+    #b7c5d11a 76%, transparent 77% 93%, #b7c5d110 94%, transparent 95%);
+  pointer-events: none;
+  content: '';
+}
+
+.home-workshop::before { inset: 17% auto auto 0; }
+
+.home-workshop::after {
+  inset: auto 0 19% auto;
+  transform: scaleX(-1);
 }
 
 .home .home-scene--engraving {
