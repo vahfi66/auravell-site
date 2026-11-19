@@ -23,6 +23,36 @@
   white-space: nowrap;
 }
 
+.catalog-search {
+  position: relative;
+  margin-bottom: 16px;
+}
+
+.catalog-search svg {
+  position: absolute;
+  inset: 50% auto auto 14px;
+  width: 22px;
+  height: 22px;
+  translate: 0 -50%;
+  color: var(--catalog-muted);
+  pointer-events: none;
+}
+
+.catalog-search input {
+  width: 100%;
+  min-height: 50px;
+  padding: 0 12px 0 46px;
+  border: 1px solid var(--catalog-rule);
+  border-radius: var(--facet-corners);
+  background: var(--catalog-panel);
+  color: var(--catalog-ink);
+  color-scheme: dark;
+  font: inherit;
+  font-size: 1rem;
+}
+
+.catalog-search input::placeholder { color: var(--catalog-muted); }
+
 .catalog-toolbar {
   display: flex;
   align-items: center;
@@ -221,12 +251,37 @@
 
 .catalog-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: clamp(28px, 3.2vw, 52px) clamp(14px, 2.15vw, 32px);
+  max-width: 960px;
+  margin-inline: auto;
+}
+
+.catalog-grid[data-preview] {
+  max-width: 464px;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.catalog-more {
+  display: flex;
+  justify-content: center;
+  margin-top: clamp(18px, 3vw, 32px);
+}
+
+.catalog-more .action {
+  justify-content: center;
+  width: min(100%, 464px);
+  border-color: var(--catalog-rule);
+  border-radius: var(--facet-corners);
+  background: var(--catalog-panel);
+  color: var(--catalog-ink);
+  cursor: pointer;
 }
 
 .catalog-product {
   position: relative;
+  display: grid;
+  grid-template-rows: auto 1fr;
 }
 
 .catalog-product-heading {
@@ -588,6 +643,7 @@
 
   .catalog-active-filter:hover,
   .catalog-filter-option:hover,
+  .catalog-more .action:hover,
   .product-dialog-close:hover {
     background: #242528;
   }
@@ -598,12 +654,6 @@
 
   .product-detail-buy:hover {
     background: #d9dce0;
-  }
-}
-
-@media (max-width: 1024px) {
-  .catalog-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
@@ -670,8 +720,20 @@
 }
 
 @media (max-width: 560px) {
-  .catalog-grid {
+  .catalog-grid:not([data-preview]) .catalog-product-info {
     grid-template-columns: minmax(0, 1fr);
+    align-items: start;
+    align-content: start;
+    gap: 4px;
+    padding-block: 10px;
+  }
+
+  .catalog-grid:not([data-preview]) .catalog-product-info > * {
+    grid-area: auto;
+  }
+
+  .catalog-grid:not([data-preview]) .catalog-product-heading {
+    font-size: 1.25rem;
   }
 
   .catalog-active-filters {

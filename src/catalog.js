@@ -2,9 +2,15 @@ import { calculateEngraving, engravingRates, formatPrice } from './products.js';
 
 const chevron = `<svg viewBox="0 0 16 16" aria-hidden="true" fill="none"><path d="m4 6 4 4 4-4" stroke="currentColor" stroke-width="1.25"/></svg>`;
 const cross = `<svg viewBox="0 0 20 20" aria-hidden="true" fill="none"><path d="m5 5 10 10M15 5 5 15" stroke="currentColor" stroke-width="1.25"/></svg>`;
+const magnifier = `<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="10.5" cy="10.5" r="5.75"/><path d="m15 15 4.5 4.5"/></svg>`;
 
 const itemCount = new Intl.PluralRules('ru');
 const itemForms = { one: 'украшение', few: 'украшения', many: 'украшений' };
+const previewSize = 2;
+
+function normalizeSearch(text) {
+  return text.toLowerCase().normalize('NFD').replace(/\p{Diacritic}/gu, '').trim();
+}
 
 function filterMenu(key, title, options) {
   return `
@@ -110,8 +116,17 @@ export function mountCatalog({ products, onAdd }) {
     metal: new Set(),
     stone: new Set(),
   };
+  const searchIndex = new Map(products.map(({ id, name, type, category, metal, stone }) =>
+    [id, normalizeSearch([name, type, category, metal, stone].join(' '))]));
+  let expanded = false;
 
   container.innerHTML = `
+    <div class="catalog-search" role="search" aria-label="Украшения">
+      ${magnifier}
+      <label class="catalog-sr-only" for="catalog-search">Поиск украшений</label>
+      <input type="search" id="catalog-search" placeholder="Название, металл или камень"
+        autocomplete="off" spellcheck="false">
+    </div>
     <div class="catalog-toolbar">
       <div class="catalog-categories" role="group" aria-label="Тип изделия">
         <button class="catalog-category" type="button" data-category="" aria-pressed="true">Все изделия</button>
@@ -129,8 +144,11 @@ export function mountCatalog({ products, onAdd }) {
       <div class="catalog-active-filters" aria-label="Выбранные характеристики" role="group" hidden></div>
       <button type="button" class="catalog-reset" data-reset hidden>Сбросить фильтры</button>
     </div>
-    <div class="catalog-grid">
+    <div class="catalog-grid" id="catalog-grid">
       ${products.map(productCard).join('')}
+    </div>
+    <div class="catalog-more" hidden>
+      <button type="button" class="action" data-show-more aria-controls="catalog-grid">Показать ещё</button>
     </div>
     <div class="catalog-empty" hidden>
       <p>Украшения не найдены</p>
@@ -141,9 +159,12 @@ export function mountCatalog({ products, onAdd }) {
   const facetInputs = [...container.querySelectorAll('input[data-filter]')];
   const menus = [...container.querySelectorAll('.catalog-filter-menu')];
   const cards = [...container.querySelectorAll('[data-item]')];
+  const search = container.querySelector('#catalog-search');
+  const grid = container.querySelector('#catalog-grid');
+  const showMore = container.querySelector('.catalog-more');
   const count = container.querySelector('.catalog-results-count');
   const activeFilters = container.querySelector('.catalog-active-filters');
-  const resetButton = container.querySelector('.catalog-results-bar [data-reset]');
+  const resetButtons = [...container.querySelectorAll('[data-reset]')];
   const empty = container.querySelector('.catalog-empty');
 
   function updateCategoryLink() {
@@ -154,10 +175,18 @@ export function mountCatalog({ products, onAdd }) {
   }
 
   function updateCatalog() {
-    const visible = products.filter((product) => Object.entries(selected).every(([key, values]) =>
-      !values.size || values.has(product[key])));
-    const visibleIds = new Set(visible.map(({ id }) => id));
+    const query = normalizeSearch(search.value);
+    const terms = query ? query.split(/\s+/) : [];
+    const hasFilters = Object.values(selected).some((values) => values.size);
+    const matches = products.filter((product) =>
+      terms.every((term) => searchIndex.get(product.id).includes(term)) &&
+      Object.entries(selected).every(([key, values]) => !values.size || values.has(product[key])));
+    const preview = !expanded && !hasFilters && !terms.length && matches.length > previewSize;
+    const shown = preview ? matches.slice(0, previewSize) : matches;
+    const visibleIds = new Set(shown.map(({ id }) => id));
 
+    grid.toggleAttribute('data-preview', preview);
+    showMore.hidden = !preview;
     for (const card of cards) card.hidden = !visibleIds.has(card.dataset.item);
     for (const button of categoryButtons) {
       const category = button.dataset.category;
@@ -178,10 +207,13 @@ export function mountCatalog({ products, onAdd }) {
     `).join('');
     activeFilters.hidden = !active.length;
 
-    const label = `${visible.length} ${itemForms[itemCount.select(visible.length)]}`;
+    const label = preview ? `Показано ${shown.length} из ${matches.length}` :
+      `${matches.length} ${itemForms[itemCount.select(matches.length)]}`;
     if (count.textContent !== label) count.textContent = label;
-    resetButton.hidden = !selected.category.size && !active.length;
-    empty.hidden = Boolean(visible.length);
+    resetButtons[0].hidden = !hasFilters && !query;
+    const resetLabel = query ? (hasFilters ? 'Сбросить поиск и фильтры' : 'Сбросить поиск') : 'Сбросить фильтры';
+    for (const button of resetButtons) button.textContent = resetLabel;
+    empty.hidden = Boolean(matches.length);
   }
 
   function closeMenus(except) {
@@ -189,6 +221,8 @@ export function mountCatalog({ products, onAdd }) {
       if (menu !== except) menu.open = false;
     }
   }
+
+  search.addEventListener('input', updateCatalog);
 
   container.addEventListener('change', (event) => {
     const input = event.target.closest('input[data-filter]');
@@ -218,10 +252,16 @@ export function mountCatalog({ products, onAdd }) {
       const next = activeFilters.children[index] || activeFilters.lastElementChild;
       (next || container.querySelector(`[data-filter-menu="${key}"] summary`)).focus({ preventScroll: true });
     } else if ('reset' in button.dataset) {
+      const hadSearch = Boolean(search.value.trim());
+      search.value = '';
       Object.values(selected).forEach((values) => values.clear());
       updateCategoryLink();
       updateCatalog();
-      categoryButtons[0].focus();
+      (hadSearch ? search : categoryButtons[0]).focus();
+    } else if ('showMore' in button.dataset) {
+      expanded = true;
+      updateCatalog();
+      cards[previewSize]?.querySelector('button')?.focus();
     } else if ('product' in button.dataset) {
       closeMenus();
       openProduct(button.dataset.product, { animate: event.detail !== 0, trigger: button });
