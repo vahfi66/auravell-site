@@ -192,7 +192,7 @@
 }
 
 .home-about-background::after {
-  background: radial-gradient(ellipse at center, #050b13a3 18%, #050b1366 50%, #050b1324 79%);
+  background: radial-gradient(ellipse at center, #080b10a3 18%, #080b1066 50%, #080b1024 79%);
 }
 
 .home-scene--about .home-scene-copy { padding-block: clamp(28px, 6svh, 76px); }
@@ -378,7 +378,7 @@
   }
 
   .home-about-background::after {
-    background: radial-gradient(ellipse 94% 63% at center, #050b13bc 24%, #050b137d 65%, #050b1324);
+    background: radial-gradient(ellipse 94% 63% at center, #080b10bc 24%, #080b107d 65%, #080b1024);
   }
 
   .home-scene--about .home-scene-copy p { line-height: 1.43; }
