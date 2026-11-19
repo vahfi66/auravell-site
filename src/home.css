@@ -168,6 +168,7 @@
 }
 
 .home-scene--editorial .home-scene-copy .action { margin-top: clamp(12px, 2.1svh, 20px); }
+.home-scene--editorial .home-scene-copy .home-scene-detail { margin-top: 10px; }
 
 .home-engraving-background, .home-about-background {
   position: absolute;
@@ -192,12 +193,11 @@
 }
 
 .home-about-background::after {
-  background: radial-gradient(ellipse at center, #08090ad9 12%, #08090ab8 42%, #08090a66 78%);
+  background: linear-gradient(90deg, #08090abb, #08090a88 36%, transparent 62%);
 }
 
-.home-scene--about .home-scene-copy { padding-block: clamp(32px, 7svh, 80px); }
-.home-scene--about .home-scene-copy p { max-width: 54ch; }
-.home-scene--about .home-scene-copy p + p { margin-top: clamp(12px, 1.7svh, 16px); }
+.home-scene--about .home-scene-copy p { max-width: 48ch; }
+.home-scene--about .home-scene-copy p + p { margin-top: clamp(9px, 1.5svh, 14px); }
 
 .home-catalog-link {
   display: inline-flex;
@@ -227,24 +227,15 @@
   mask-image: none;
 }
 
-.home-perfume-layout {
-  display: grid;
-  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
-  align-items: center;
-  gap: clamp(24px, 5.6vw, 88px);
-  padding-block: clamp(24px, 5svh, 64px);
-}
-
-.home-perfume-photo {
+.home-scene--perfume .home-scene-photo {
+  --chapter-photo-opacity: .94;
   --chapter-edge-opacity: .64;
+  inset: 0;
   width: 100%;
-  height: auto;
-  max-height: 68svh;
   object-fit: contain;
+  object-position: right center;
+  mask-image: linear-gradient(90deg, transparent 31%, #0007 51%, #000 73%), var(--chapter-edge-mask);
 }
-
-.home-perfume-layout .home-scene-copy { padding: 0; text-align: left; }
-.home-perfume-layout .home-scene-copy p { margin-inline: 0; }
 
 .home-perfume-action {
   justify-content: center;
@@ -281,7 +272,7 @@
       view-timeline-inset: var(--header-height) 0;
     }
 
-    .home :is(.hero-visual, .home-craft-photo, .home-scene-photo, .home-perfume-photo) {
+    .home :is(.hero-visual, .home-craft-photo, .home-scene-photo) {
       animation: home-chapter-light linear both;
       animation-timeline: --home-chapter;
     }
@@ -298,8 +289,11 @@
 }
 
 @media (max-width: 980px) and (orientation: portrait) {
+  .home-scene--about { gap: clamp(156px, 26svh, 232px); }
+  .home-scene--about .home-scene-photo { object-position: center 34%; }
+
   .home-about-background::after {
-    background: linear-gradient(180deg, #08090a30, #08090a72 18%, #08090ad9 42%, #08090ac2 73%, #08090a66);
+    background: linear-gradient(180deg, #08090a35, transparent 18%, transparent 42%, #08090a95 67%, #08090ade);
   }
 }
 
@@ -375,19 +369,15 @@
     mask-image: linear-gradient(90deg, transparent, #000 24%), var(--scene-mask), var(--chapter-edge-mask);
   }
 
-  .home-perfume-layout {
-    grid-template-columns: minmax(0, 1fr);
-    width: min(100% - var(--gutter) * 2, 480px);
-    gap: clamp(16px, 3svh, 26px);
-    padding-block: clamp(14px, 3svh, 26px);
-  }
-
-  .home-perfume-photo {
-    height: min(100vw - var(--gutter) * 2, 42svh, 480px);
+  .home-scene--perfume .home-scene-photo {
+    --chapter-photo-opacity: .94;
+    inset: 13% 0 auto;
+    width: 100%;
+    height: min(68%, 123vw);
     object-fit: cover;
+    object-position: center;
+    mask-image: linear-gradient(180deg, transparent, #000 16%, #000 75%, transparent);
   }
-
-  .home-perfume-action { width: 100%; }
 
   .home-scene--delivery .home-scene-photo {
     --chapter-photo-opacity: .47;
@@ -409,6 +399,14 @@
     width: 100%;
   }
 
+  .home-scene--about .home-scene-photo {
+    height: clamp(320px, 107vw, 500px);
+    object-position: center 23%;
+    mask-image: linear-gradient(180deg, #000 62%, transparent 100%);
+  }
+
+  .home-scene--about .home-scene-copy p { line-height: 1.43; }
+
   .home-engraving-background::after {
     background: linear-gradient(157deg,
       #08090aee, #08090ae0 21%, #08090aa8 29%, #08090a40 33%, #08090a00 37%,
@@ -427,29 +425,6 @@
   .home-craft-copy .home-craft-detail { margin-block: 4px 5px; }
 }
 
-@media (max-width: 380px) and (max-height: 640px) {
-  .home-scene--about .home-scene-copy {
-    width: calc(100% - 28px);
-    padding-block: 10px;
-  }
-
-  .home-scene--about .home-scene-copy h2 { font-size: 34px; }
-  .home-scene--about .home-scene-copy p,
-  .home-scene--about .home-scene-copy p + p {
-    margin-top: 6px;
-    line-height: 1.35;
-  }
-
-  .home-catalog-link { margin-top: 0; }
-
-  .home-perfume-layout { gap: 14px; }
-  .home-perfume-photo {
-    height: auto;
-    max-height: 34svh;
-    object-fit: contain;
-  }
-}
-
 @media (max-width: 980px) and (max-height: 500px) and (orientation: landscape) {
   .hero-visual { grid-area: 1 / 1; }
   .hero-inner { grid-area: 1 / 2; }
@@ -464,4 +439,5 @@
   .home-scene-copy { padding-block: clamp(16px, 5svh, 28px); }
   .home .home-scene--editorial { padding-block: 14px; }
   .home-scene--editorial h2 { font-size: clamp(34px, 4.6vw, 42px); }
+  .home-scene--about { gap: 16px; }
 }
