@@ -58,7 +58,6 @@
   aspect-ratio: 1;
   justify-self: center;
   margin-block: 9px 14px;
-  border: 1px solid #c2cbd12a;
   background: radial-gradient(ellipse 50% 42% at center, #b7c5d114, transparent);
   overflow: clip;
 }
@@ -137,23 +136,6 @@
 
 .home-scene-copy .action { margin-top: 26px; }
 
-.home-scene--editorial {
-  align-content: space-between;
-  gap: clamp(18px, 9svh, 74px);
-  padding-block: clamp(14px, 3svh, 34px) clamp(16px, 3svh, 32px);
-}
-
-.home-scene--editorial .home-scene-copy {
-  padding-block: 0;
-  text-align: left;
-}
-
-.home-scene--editorial .home-scene-copy p {
-  max-width: 43ch;
-  margin: 0;
-}
-
-
 .home-engraving-background {
   position: absolute;
   inset: 0;
@@ -163,6 +145,10 @@
 .home-engraving-background::after {
   position: absolute;
   inset: 0;
+  background:
+    radial-gradient(ellipse 32% 30% at center, #08090a70, transparent),
+    radial-gradient(ellipse at 69% 38%, transparent 6%, #08090a76 63%),
+    linear-gradient(180deg, var(--ink), transparent 18% 73%, var(--ink));
   content: '';
 }
 
@@ -180,22 +166,18 @@
   text-decoration: none;
 }
 
-.home-engraving-background::after {
-  background: linear-gradient(90deg,
-      var(--ink) 39%, #08090afa 42%, #08090ae8 45%, #08090ac2 49%,
-      #08090a85 54%, #08090a4a 59%, #08090a1a 64%, #08090a00 68%),
-    radial-gradient(ellipse 50% 45% at 16% 100%, #08090ac7, #08090a54 60%, transparent 100%),
-    linear-gradient(180deg, #08090a33, transparent 19%);
+.home-scene--engraving .home-scene-copy {
+  text-shadow: 0 2px 12px #08090a;
 }
 
 .home-scene--engraving .home-scene-photo {
-  --chapter-photo-opacity: 1;
+  --chapter-photo-opacity: .72;
   --chapter-edge-opacity: .64;
-  inset: 0;
-  width: 100%;
+  inset: -11% -5% auto auto;
+  width: 96%;
   height: 100%;
-  object-position: center 46%;
-  mask-image: none;
+  object-position: center 68%;
+  mask-image: linear-gradient(90deg, transparent, #000 18%), linear-gradient(180deg, #000 74%, transparent);
 }
 
 .home-scene--perfume .home-scene-photo {
@@ -322,23 +304,16 @@
   .home-scene-copy p { margin-top: 14px; }
   .home-scene-copy .action { margin-top: 21px; }
 
-  .home .home-scene--editorial {
-    min-height: calc(var(--chapter-height) - 6px);
-    padding-block: clamp(14px, 2.7svh, 24px) clamp(14px, 2.5svh, 24px);
-  }
-
-
   .home-scene--engraving .home-scene-photo {
-    inset: 8% 0 auto;
-    height: 85%;
-    object-position: center 47%;
+    inset: 0;
+    width: 100%;
+    height: 78%;
+    object-position: center 67%;
+    mask-image: linear-gradient(180deg, #000 66%, transparent);
   }
 
   .home-engraving-background::after {
-    background: linear-gradient(180deg, var(--ink) 8%, #08090a7d 18%, transparent 32%, transparent 59%, #08090abd 78%, var(--ink) 91%),
-      linear-gradient(157deg,
-      #08090aee, #08090ae0 21%, #08090aa8 29%, #08090a40 33%, #08090a00 37%,
-      #08090a00 54%, #08090a88 61%, #08090ad4 72%, #08090af0 87%, #08090af5);
+    background: linear-gradient(180deg, var(--ink), transparent 16% 30%, #08090a60 48%, transparent 76%);
   }
 }
 
@@ -362,8 +337,8 @@
   .home-workshop > .wrap { padding-block: 14px; }
   .home-workshop h2 { font-size: clamp(30px, 5vw, 42px); }
   .home-scene-copy { padding-block: clamp(16px, 5svh, 28px); }
-  .home .home-scene--editorial { padding-block: 14px; }
-  .home-scene--editorial h2 { font-size: clamp(34px, 4.6vw, 42px); }
+  .home-scene--engraving .home-scene-copy { padding-block: 20px; }
+  .home-scene--engraving h2 { font-size: clamp(34px, 4.6vw, 42px); }
 }
 
 @media (max-width: 720px) and (orientation: portrait) {
