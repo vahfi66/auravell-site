@@ -50,10 +50,11 @@
 .home-craft-copy { display: grid; align-content: start; }
 
 .home-craft-product {
-  width: min(100%, 360px);
+  width: min(100%, 300px);
   height: auto;
   justify-self: center;
-  margin-top: 6px;
+  margin-block: 9px 14px;
+  border: 1px solid #c2cbd12a;
   background: radial-gradient(ellipse 50% 42% at center, #b7c5d114, transparent);
 }
 
@@ -259,7 +260,7 @@
 
   .home-workshop-grid { grid-template-columns: minmax(0, 1fr); gap: 18px; }
   .home-craft-copy p { font-size: 15px; line-height: 1.42; }
-  .home-craft-product { width: min(76%, 285px); }
+  .home-craft-product { width: min(72%, 247px); }
   .home-scene h2 { font-size: clamp(40px, 11vw, 68px); }
 
   .home-scene-photo {
@@ -312,8 +313,15 @@
   }
 
 
+  .home-scene--engraving .home-scene-photo {
+    inset: 8% 0 auto;
+    height: 85%;
+    object-position: center 47%;
+  }
+
   .home-engraving-background::after {
-    background: linear-gradient(157deg,
+    background: linear-gradient(180deg, var(--ink) 8%, #08090a7d 18%, transparent 32%, transparent 59%, #08090abd 78%, var(--ink) 91%),
+      linear-gradient(157deg,
       #08090aee, #08090ae0 21%, #08090aa8 29%, #08090a40 33%, #08090a00 37%,
       #08090a00 54%, #08090a88 61%, #08090ad4 72%, #08090af0 87%, #08090af5);
   }
