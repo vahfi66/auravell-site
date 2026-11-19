@@ -147,9 +147,8 @@ export function mountCatalog({ products, onAdd }) {
     <div class="catalog-grid" id="catalog-grid">
       ${products.map(productCard).join('')}
     </div>
-    <div class="catalog-more" hidden>
-      <button type="button" class="action" data-show-more aria-controls="catalog-grid">Показать ещё</button>
-    </div>
+    <button type="button" class="catalog-more" data-toggle-preview aria-controls="catalog-grid"
+      aria-expanded="false" hidden>Показать ещё</button>
     <div class="catalog-empty" hidden>
       <p>Украшения не найдены</p>
       <button type="button" class="catalog-reset" data-reset>Сбросить фильтры</button>
@@ -161,7 +160,7 @@ export function mountCatalog({ products, onAdd }) {
   const cards = [...container.querySelectorAll('[data-item]')];
   const search = container.querySelector('#catalog-search');
   const grid = container.querySelector('#catalog-grid');
-  const showMore = container.querySelector('.catalog-more');
+  const previewToggle = container.querySelector('[data-toggle-preview]');
   const count = container.querySelector('.catalog-results-count');
   const activeFilters = container.querySelector('.catalog-active-filters');
   const resetButtons = [...container.querySelectorAll('[data-reset]')];
@@ -181,12 +180,15 @@ export function mountCatalog({ products, onAdd }) {
     const matches = products.filter((product) =>
       terms.every((term) => searchIndex.get(product.id).includes(term)) &&
       Object.entries(selected).every(([key, values]) => !values.size || values.has(product[key])));
-    const preview = !expanded && !hasFilters && !terms.length && matches.length > previewSize;
+    const canTogglePreview = !hasFilters && !terms.length && matches.length > previewSize;
+    const preview = canTogglePreview && !expanded;
     const shown = preview ? matches.slice(0, previewSize) : matches;
     const visibleIds = new Set(shown.map(({ id }) => id));
 
     grid.toggleAttribute('data-preview', preview);
-    showMore.hidden = !preview;
+    previewToggle.hidden = !canTogglePreview;
+    previewToggle.setAttribute('aria-expanded', String(expanded));
+    previewToggle.textContent = expanded ? 'Свернуть' : 'Показать ещё';
     for (const card of cards) card.hidden = !visibleIds.has(card.dataset.item);
     for (const button of categoryButtons) {
       const category = button.dataset.category;
@@ -258,10 +260,11 @@ export function mountCatalog({ products, onAdd }) {
       updateCategoryLink();
       updateCatalog();
       (hadSearch ? search : categoryButtons[0]).focus();
-    } else if ('showMore' in button.dataset) {
-      expanded = true;
+    } else if (button === previewToggle) {
+      expanded = !expanded;
       updateCatalog();
-      cards[previewSize]?.querySelector('button')?.focus();
+      if (expanded) cards[previewSize]?.querySelector('button')?.focus();
+      else previewToggle.scrollIntoView({ block: 'nearest', behavior: 'instant' });
     } else if ('product' in button.dataset) {
       closeMenus();
       openProduct(button.dataset.product, { animate: event.detail !== 0, trigger: button });

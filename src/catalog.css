@@ -264,17 +264,16 @@
 
 .catalog-more {
   display: flex;
-  justify-content: center;
-  margin-top: clamp(18px, 3vw, 32px);
-}
-
-.catalog-more .action {
-  justify-content: center;
-  width: min(100%, 464px);
-  border-color: var(--catalog-rule);
-  border-radius: var(--facet-corners);
-  background: var(--catalog-panel);
+  align-items: center;
+  min-height: 44px;
+  margin: 6px auto 0;
+  padding: 0 8px;
+  border: 0;
+  background: transparent;
   color: var(--catalog-ink);
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
   cursor: pointer;
 }
 
@@ -643,7 +642,6 @@
 
   .catalog-active-filter:hover,
   .catalog-filter-option:hover,
-  .catalog-more .action:hover,
   .product-dialog-close:hover {
     background: #242528;
   }
