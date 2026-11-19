@@ -309,7 +309,7 @@ svg { display: block; flex: 0 0 auto; }
 }
 
 .hero h1 {
-  font: 400 clamp(69px, 7.25vw, 122px)/1.03 var(--font-display);
+  font: 400 clamp(73px, 7.7vw, 129px)/1.03 var(--font-display);
   letter-spacing: -.045em;
 }
 
