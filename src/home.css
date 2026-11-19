@@ -44,9 +44,9 @@
 
 .home-workshop-grid {
   display: grid;
-  grid-template-columns: minmax(0, 1.9fr) minmax(0, 1fr);
-  align-items: end;
-  gap: clamp(24px, 6vw, 96px);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: start;
+  gap: clamp(24px, 6vw, 86px);
 }
 
 .home-craft-photo {
@@ -57,8 +57,6 @@
   object-fit: cover;
   mask-image: radial-gradient(ellipse 70% 75% at 52% 50%, #000 45%, transparent 84%);
 }
-
-.home-craft--onde .home-craft-photo { aspect-ratio: 1.85; }
 
 .home-craft-copy { padding-top: 12px; }
 
@@ -289,25 +287,38 @@
   .home-workshop h2 { font-size: clamp(32px, 9vw, 60px); text-wrap: initial; }
   .home-scene h2 { font-size: clamp(40px, 11vw, 68px); }
 
-  .home-workshop-grid { grid-template-columns: minmax(0, 1fr); gap: clamp(12px, 2.5svh, 22px); }
+  .home-workshop-grid { grid-template-columns: minmax(0, 1fr); gap: 0; }
   .home-craft-copy p { font-size: 15px; line-height: 1.42; }
 
-  .home-craft--onde .home-craft-photo {
-    width: calc(100% + 2 * var(--gutter));
-    max-width: none;
-    margin-inline: calc(-1 * var(--gutter));
-    aspect-ratio: 3 / 2;
-    mask-image: linear-gradient(180deg, transparent, #000 11%, #000 82%, transparent);
-  }
-
-  .home-craft--eclat {
+  .home-craft {
+    position: relative;
+    isolation: isolate;
     display: grid;
-    grid-template-columns: minmax(0, 38%) minmax(0, 1fr);
     align-items: center;
-    gap: 12px;
+    min-height: clamp(200px, 33svh, 305px);
+    padding-block: 12px;
   }
 
-  .home-craft--eclat .home-craft-copy { padding-top: 0; }
+  .home-craft-photo {
+    position: absolute;
+    z-index: -1;
+    inset: 0 calc(-1 * var(--gutter)) 0 auto;
+    width: 67%;
+    height: 100%;
+    object-position: 61% center;
+    mask-image: linear-gradient(90deg, transparent, #000 34%), linear-gradient(180deg, transparent, #000 16%, #000 84%, transparent);
+    mask-composite: intersect;
+  }
+
+  .home-craft-copy { width: 46%; padding-top: 0; }
+
+  .home-craft--eclat .home-craft-photo {
+    inset-inline: calc(-1 * var(--gutter)) auto;
+    object-position: 46% center;
+    mask-image: linear-gradient(270deg, transparent, #000 33%), linear-gradient(180deg, transparent, #000 16%, #000 84%, transparent);
+  }
+
+  .home-craft--eclat .home-craft-copy { justify-self: end; }
 
   .home-scene-photo {
     --chapter-photo-opacity: .35;
@@ -411,10 +422,15 @@
 
   .home .hero-visual {
     position: absolute;
-    inset: 0 0 clamp(92px, 15svh, 136px);
+    inset: 0;
   }
 
-  .home .hero-visual img { object-position: center 39%; }
+  .home .hero-visual img { object-position: center; }
+
+  .home .hero-visual::after {
+    height: 25%;
+    background: linear-gradient(transparent, #08090a42 70%, #08090a80);
+  }
 
   .home .hero-inner {
     grid-area: 1 / 1;
@@ -427,7 +443,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding-block: clamp(30px, 6svh, 54px) clamp(20px, 4svh, 34px);
+    padding-block: clamp(36px, 8svh, 70px) clamp(20px, 4svh, 34px);
   }
 
   .home .hero h1 { font-size: clamp(40px, 13.4vw, 69px); line-height: .99; }
