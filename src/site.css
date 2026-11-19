@@ -67,6 +67,7 @@
 body { margin: 0; }
 body:has(dialog[open]) { overflow: hidden; }
 h1, h2, h3, p { margin: 0; }
+:is(h1, h2, .home-craft-copy h3) { text-shadow: 0 0 18px #e5edf220; }
 a { color: inherit; }
 button, input, select, textarea { font: inherit; }
 button { color: inherit; cursor: pointer; }

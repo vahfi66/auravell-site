@@ -7,12 +7,13 @@
 }
 
 .home main > section + section { border-block-start: 1px solid #ffffff14; }
+.home main > .home-scene--about { border-block-start-color: var(--ink); }
 
 .home .hero-visual::after {
   position: absolute;
   inset: auto 0 0;
-  height: clamp(40px, 17%, 160px);
-  background: linear-gradient(transparent, var(--ink));
+  height: clamp(80px, 32%, 260px);
+  background: linear-gradient(transparent, #08090a30 27%, #08090a80 53%, #08090ad9 78%, var(--ink));
   pointer-events: none;
   content: '';
 }
@@ -53,7 +54,7 @@
   height: auto;
   justify-self: center;
   margin-top: 6px;
-  mask-image: radial-gradient(ellipse 65% 65% at center, #000 62%, transparent 91%);
+  background: radial-gradient(ellipse 50% 42% at center, #b7c5d114, transparent);
 }
 
 .home-craft-copy h3 {
@@ -221,21 +222,6 @@
   .home-perfume-action:hover { background-color: #1d1f22; }
 }
 
-.home .home-scene--delivery { min-height: 0; }
-
-.home-scene--delivery .home-scene-copy {
-  padding-block: clamp(14px, 2.4vw, 28px) clamp(20px, 3vw, 36px);
-}
-
-.home-scene--delivery .home-scene-photo {
-  --chapter-photo-opacity: .54;
-  --scene-mask: linear-gradient(90deg, transparent 18%, #0004 48%, #000 82%);
-  inset: 0 0 0 auto;
-  width: auto;
-  max-width: 100%;
-  object-position: right center;
-}
-
 @supports (animation-timeline: view()) {
   @media (prefers-reduced-motion: no-preference) {
     .home :is(.hero, .home-workshop, .home-scene) {
@@ -317,13 +303,6 @@
   .home-perfume-content h2 { font-size: clamp(39px, 10.7vw, 66px); }
   .home-perfume-content .home-scene-copy p { line-height: 1.43; }
 
-  .home-scene--delivery .home-scene-photo {
-    --chapter-photo-opacity: .47;
-    --scene-mask: linear-gradient(90deg, transparent 14%, #0004 46%, #000 80%);
-    height: 100%;
-    mask-image: var(--scene-mask), var(--chapter-edge-mask);
-  }
-
   .home-scene-copy p { margin-top: 14px; }
   .home-scene-copy .action { margin-top: 21px; }
 
@@ -375,8 +354,7 @@
   .home .hero-visual img { object-position: center; }
 
   .home .hero-visual::after {
-    height: 28%;
-    background: linear-gradient(transparent, #08090a42 54%, var(--ink));
+    height: 44%;
   }
 
   .home .hero-inner {
