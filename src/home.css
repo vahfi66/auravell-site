@@ -38,6 +38,10 @@
   align-items: center;
 }
 
+.home .home-scene--engraving {
+  min-height: calc(var(--chapter-height) * .8);
+}
+
 .home-workshop > .wrap { padding-block: clamp(28px, 5svh, 62px); }
 .home-workshop h2 {
   margin: 0 auto clamp(22px, 4svh, 44px);
@@ -173,9 +177,9 @@
 .home-scene--engraving .home-scene-photo {
   --chapter-photo-opacity: .72;
   --chapter-edge-opacity: .64;
-  inset: -11% -5% auto auto;
+  inset: -16% -5% auto auto;
   width: 96%;
-  height: 100%;
+  height: calc(var(--chapter-height) * .98);
   object-position: center 68%;
   mask-image: linear-gradient(90deg, transparent, #000 18%), linear-gradient(180deg, #000 74%, transparent);
 }
@@ -304,16 +308,20 @@
   .home-scene-copy p { margin-top: 14px; }
   .home-scene-copy .action { margin-top: 21px; }
 
+  .home .home-scene--engraving {
+    min-height: calc(var(--chapter-height) * .75);
+  }
+
   .home-scene--engraving .home-scene-photo {
-    inset: 0;
+    inset: -48% 0 auto;
     width: 100%;
-    height: 78%;
+    height: 148%;
     object-position: center 67%;
-    mask-image: linear-gradient(180deg, #000 66%, transparent);
+    mask-image: none;
   }
 
   .home-engraving-background::after {
-    background: linear-gradient(180deg, var(--ink), transparent 16% 30%, #08090a60 48%, transparent 76%);
+    background: linear-gradient(180deg, var(--ink), transparent 17% 28%, #08090a70 49%, #08090a40 78%, var(--ink));
   }
 }
 
