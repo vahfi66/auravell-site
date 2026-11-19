@@ -44,6 +44,11 @@
 .home .home-workshop {
   display: grid;
   align-items: center;
+  background-image:
+    linear-gradient(var(--ink), #08090a26 23%, #08090a26 76%, var(--ink)),
+    url('/images/workshop-slate.webp');
+  background-position: center, 35% center;
+  background-size: cover;
 }
 
 .home .home-scene--engraving {
