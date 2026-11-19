@@ -303,7 +303,10 @@ svg { display: block; flex: 0 0 auto; }
 .hero-inner { display: flex; align-items: center; }
 
 .hero-copy { padding-block: 54px; }
-.m-enter .hero-copy { animation: hero-copy-in 570ms var(--ease-out) both; }
+.m-enter .hero-catalog,
+.m-enter .hero h1 {
+  animation: hero-copy-in var(--hero-copy-duration, 570ms) var(--ease-out) both;
+}
 
 .hero h1 {
   font: 400 clamp(69px, 7.25vw, 122px)/1.03 var(--font-display);
@@ -377,7 +380,10 @@ svg { display: block; flex: 0 0 auto; }
 }
 
 @keyframes hero-copy-in {
-  from { opacity: .62; transform: translateY(8px); }
+  from {
+    opacity: var(--hero-copy-start-opacity, .62);
+    transform: translateY(var(--hero-copy-travel, 8px));
+  }
   to { opacity: 1; transform: none; }
 }
 

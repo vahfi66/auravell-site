@@ -1,6 +1,14 @@
 .home { --chapter-height: calc(100svh - var(--header-height)); }
 .home .header-inner { grid-template-columns: 1fr auto; }
 
+.home .hero h1 {
+  --hero-copy-duration: 620ms;
+  --hero-copy-start-opacity: .34;
+  --hero-copy-travel: clamp(18px, 3svh, 28px);
+  position: relative;
+  top: clamp(6px, 1.4svh, 12px);
+}
+
 .home :is(.hero, .home-workshop, .home-scene) {
   min-height: var(--chapter-height);
   background: var(--ink);
