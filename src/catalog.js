@@ -145,10 +145,15 @@ export function mountCatalog({ products, onAdd }) {
       <button type="button" class="catalog-reset" data-reset hidden>Сбросить фильтры</button>
     </div>
     <div class="catalog-grid" id="catalog-grid">
-      ${products.map(productCard).join('')}
+      ${products.slice(0, previewSize).map(productCard).join('')}
+      <button type="button" class="catalog-more" data-toggle-preview aria-controls="catalog-extra"
+        aria-expanded="false" hidden>Показать ещё</button>
+      <div class="catalog-extra" id="catalog-extra">
+        <div class="catalog-extra-grid">
+          ${products.slice(previewSize).map(productCard).join('')}
+        </div>
+      </div>
     </div>
-    <button type="button" class="catalog-more" data-toggle-preview aria-controls="catalog-grid"
-      aria-expanded="false" hidden>Показать ещё</button>
     <div class="catalog-empty" hidden>
       <p>Украшения не найдены</p>
       <button type="button" class="catalog-reset" data-reset>Сбросить фильтры</button>
@@ -161,6 +166,7 @@ export function mountCatalog({ products, onAdd }) {
   const search = container.querySelector('#catalog-search');
   const grid = container.querySelector('#catalog-grid');
   const previewToggle = container.querySelector('[data-toggle-preview]');
+  const extra = container.querySelector('#catalog-extra');
   const count = container.querySelector('.catalog-results-count');
   const activeFilters = container.querySelector('.catalog-active-filters');
   const resetButtons = [...container.querySelectorAll('[data-reset]')];
@@ -173,7 +179,7 @@ export function mountCatalog({ products, onAdd }) {
     if (url.href !== location.href) history.replaceState(history.state, '', url);
   }
 
-  function updateCatalog() {
+  function updateCatalog({ animatePreview = false } = {}) {
     const query = normalizeSearch(search.value);
     const terms = query ? query.split(/\s+/) : [];
     const hasFilters = Object.values(selected).some((values) => values.size);
@@ -182,14 +188,15 @@ export function mountCatalog({ products, onAdd }) {
       Object.entries(selected).every(([key, values]) => !values.size || values.has(product[key])));
     const canTogglePreview = !hasFilters && !terms.length && matches.length > previewSize;
     const preview = canTogglePreview && !expanded;
-    const shown = preview ? matches.slice(0, previewSize) : matches;
-    const visibleIds = new Set(shown.map(({ id }) => id));
+    const matchingIds = new Set(matches.map(({ id }) => id));
 
-    grid.toggleAttribute('data-preview', preview);
+    grid.toggleAttribute('data-disclosure', canTogglePreview);
+    extra.toggleAttribute('data-animate', animatePreview);
+    extra.inert = preview;
     previewToggle.hidden = !canTogglePreview;
     previewToggle.setAttribute('aria-expanded', String(expanded));
     previewToggle.textContent = expanded ? 'Свернуть' : 'Показать ещё';
-    for (const card of cards) card.hidden = !visibleIds.has(card.dataset.item);
+    for (const card of cards) card.hidden = !matchingIds.has(card.dataset.item);
     for (const button of categoryButtons) {
       const category = button.dataset.category;
       button.setAttribute('aria-pressed', String(category ? selected.category.has(category) : !selected.category.size));
@@ -209,7 +216,7 @@ export function mountCatalog({ products, onAdd }) {
     `).join('');
     activeFilters.hidden = !active.length;
 
-    const label = preview ? `Показано ${shown.length} из ${matches.length}` :
+    const label = preview ? `Показано ${previewSize} из ${matches.length}` :
       `${matches.length} ${itemForms[itemCount.select(matches.length)]}`;
     if (count.textContent !== label) count.textContent = label;
     resetButtons[0].hidden = !hasFilters && !query;
@@ -262,9 +269,8 @@ export function mountCatalog({ products, onAdd }) {
       (hadSearch ? search : categoryButtons[0]).focus();
     } else if (button === previewToggle) {
       expanded = !expanded;
-      updateCatalog();
-      if (expanded) cards[previewSize]?.querySelector('button')?.focus();
-      else previewToggle.scrollIntoView({ block: 'nearest', behavior: 'instant' });
+      previewToggle.focus({ preventScroll: true });
+      updateCatalog({ animatePreview: event.detail !== 0 });
     } else if ('product' in button.dataset) {
       closeMenus();
       openProduct(button.dataset.product, { animate: event.detail !== 0, trigger: button });
