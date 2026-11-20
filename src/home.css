@@ -2,11 +2,18 @@
 .home .header-inner { grid-template-columns: 1fr auto; }
 
 .home .hero h1 {
-  --hero-copy-duration: 620ms;
-  --hero-copy-start-opacity: .34;
-  --hero-copy-travel: clamp(18px, 3svh, 28px);
   position: relative;
   top: clamp(10px, 2.15svh, 19px);
+  color: #fff;
+  text-shadow: 0 2px 12px #08090abf;
+}
+
+@media (prefers-reduced-motion: no-preference) and (scripting: enabled) {
+  .hero h1[data-hero-intro] { animation: hero-title-fallback 0s linear 220ms backwards; }
+}
+
+@keyframes hero-title-fallback {
+  from { opacity: 0; }
 }
 
 .home :is(.hero, .home-workshop, .home-scene) {
@@ -260,6 +267,7 @@
   .hero-inner { grid-area: 2 / 1; }
   .hero-caption { margin-top: 10px; font-size: 14px; }
   .hero h1 { font-size: clamp(36px, 10.6vw, 70px); text-wrap: balance; }
+  .hero h1 span { display: inline-block; }
 
   .home-workshop h2 {
     max-width: 11ch;
@@ -349,6 +357,7 @@
   .hero-visual { grid-area: 1 / 1; }
   .hero-inner { grid-area: 1 / 2; }
   .hero h1 { font-size: clamp(36px, 6.3vw, 55px); }
+  .hero h1 span { display: inline-block; }
   .hero-caption { margin-top: 10px; }
   .home-workshop > .wrap { padding-block: 14px; }
   .home-workshop h2 { font-size: clamp(30px, 5vw, 42px); }
