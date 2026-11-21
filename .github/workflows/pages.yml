@@ -18,6 +18,8 @@ concurrency:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    env:
+      PAGES_ARTIFACT: github-pages-${{ github.run_attempt }}
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -32,17 +34,22 @@ jobs:
       - run: npm run build
       - uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5
         with:
+          name: ${{ env.PAGES_ARTIFACT }}
           path: dist
       - name: Wait for Pages artifact metadata
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           for attempt in {1..12}; do
-            count=$(gh api "repos/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID/artifacts?name=github-pages" --jq '.total_count')
-            if [ "$count" = '1' ]; then exit 0; fi
+            if count=$(gh api "repos/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID/artifacts?name=$PAGES_ARTIFACT" --jq '.total_count') && [ "$count" = '1' ]; then
+              sleep 10
+              exit 0
+            fi
             sleep 5
           done
           echo "Expected one github-pages artifact in this workflow run."
           exit 1
       - uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346 # v5
         id: deployment
+        with:
+          artifact_name: ${{ env.PAGES_ARTIFACT }}
