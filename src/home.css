@@ -11,20 +11,6 @@
   border-color: #242527;
 }
 
-.home .site-menu-toggle { gap: 10px; }
-.home .site-menu-icon {
-  flex-basis: 7px;
-  height: 7px;
-  border-right: 1px solid currentColor;
-  border-bottom: 1px solid currentColor;
-  transform: translateY(-2px) rotate(45deg);
-  transition: transform 160ms var(--ease-out);
-}
-.home .site-menu-icon::before, .home .site-menu-icon::after { content: none; }
-.home .site-menu-toggle[aria-expanded="true"] .site-menu-icon {
-  transform: translateY(2px) rotate(225deg);
-}
-
 .home .hero h1 {
   color: #fff;
 }
@@ -86,10 +72,6 @@
   align-items: center;
 }
 
-.home .home-scene--engraving {
-  min-height: calc(var(--chapter-height) * .8);
-}
-
 .home-workshop > .wrap { padding-block: clamp(28px, 5svh, 62px); }
 .home-workshop h2 {
   margin: 0 auto clamp(22px, 4svh, 44px);
@@ -100,6 +82,12 @@
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: clamp(26px, 6vw, 90px);
+}
+
+.workshop-action {
+  display: flex;
+  width: fit-content;
+  margin: clamp(22px, 4svh, 40px) auto 0;
 }
 
 .home-craft-copy { display: grid; align-content: start; }
@@ -151,22 +139,6 @@
 
 .home-scene:focus-visible { outline: none; }
 
-.home-scene-photo {
-  --chapter-photo-opacity: .42;
-  --chapter-edge-mask: linear-gradient(180deg, transparent, #000 16%, #000 80%, transparent);
-  --scene-mask: linear-gradient(90deg, transparent 8%, #0004 42%, #000 76%);
-  position: absolute;
-  z-index: -1;
-  inset: 0 0 0 auto;
-  width: min(64%, 940px);
-  height: 100%;
-  object-fit: cover;
-  object-position: 56% 55%;
-  opacity: var(--chapter-photo-opacity);
-  mask-image: var(--scene-mask), var(--chapter-edge-mask);
-  mask-composite: intersect;
-}
-
 .home-scene-copy {
   padding-block: clamp(60px, 8vw, 112px);
   text-align: center;
@@ -178,30 +150,6 @@
   color: #e2e1df;
   font-size: clamp(16px, 1.27vw, 19px);
   line-height: 1.55;
-}
-
-.home-scene-copy .home-scene-detail {
-  margin-top: 10px;
-  color: var(--muted);
-  font-size: 14px;
-}
-
-.home-scene-copy .action { margin-top: 26px; }
-
-.home-engraving-background {
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-}
-
-.home-engraving-background::after {
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(ellipse 32% 30% at center, #08090a70, transparent),
-    radial-gradient(ellipse at 69% 38%, transparent 6%, #08090a76 63%),
-    linear-gradient(180deg, var(--ink), transparent 18% 73%, var(--ink));
-  content: '';
 }
 
 .home-scene--about .home-scene-copy { padding-block: clamp(28px, 6svh, 76px); }
@@ -216,79 +164,6 @@
   font-size: 14px;
   font-weight: 600;
   text-decoration: none;
-}
-
-.home-scene--engraving .home-scene-copy {
-  text-shadow: 0 2px 12px #08090a;
-}
-
-.home-scene--engraving .home-scene-photo {
-  --chapter-photo-opacity: .72;
-  --chapter-edge-opacity: .64;
-  inset: -16% -5% auto auto;
-  width: 96%;
-  height: calc(var(--chapter-height) * .98);
-  object-position: center 68%;
-  mask-image: linear-gradient(90deg, transparent, #000 18%), linear-gradient(180deg, #000 74%, transparent);
-}
-
-.home-scene--perfume .home-scene-photo {
-  --chapter-photo-opacity: 1;
-  --chapter-edge-opacity: .64;
-  --chapter-edge-mask: linear-gradient(180deg, transparent, #000 13%, #000 86%, transparent);
-  --scene-mask: linear-gradient(90deg, transparent, #0008 23%, #000 46%);
-  inset: 46% 0 auto auto;
-  width: min(74%, 1080px);
-  height: min(100%, 68vw);
-  object-position: center;
-  transform: translateY(-50%);
-}
-
-.home-perfume-content {
-  display: grid;
-  justify-items: start;
-  gap: clamp(16px, 2.4svh, 24px);
-  padding-block: clamp(24px, 5svh, 64px);
-}
-
-.home-perfume-content .home-scene-copy {
-  max-width: 45%;
-  padding: 0;
-  text-align: left;
-}
-
-.home-perfume-content .home-scene-copy p { margin-inline: 0; }
-
-.home-perfume-action {
-  justify-content: center;
-  border-color: var(--facet-edge);
-  border-radius: var(--facet-corners);
-  background-color: #08090a80;
-}
-
-.home-perfume-action:is(:active, [data-touch-pressed]) { background-color: #272a2d; }
-
-@media (hover: hover) and (pointer: fine) {
-  .home-perfume-action:hover { background-color: #1d1f22; }
-}
-
-@supports (animation-timeline: view()) {
-  @media (prefers-reduced-motion: no-preference) {
-    .home :is(.hero, .home-workshop, .home-scene) {
-      view-timeline-name: --home-chapter;
-      view-timeline-inset: var(--header-height) 0;
-    }
-
-    .home .home-scene-photo {
-      animation: home-chapter-light linear both;
-      animation-timeline: --home-chapter;
-    }
-  }
-}
-
-@keyframes home-chapter-light {
-  0%, 100% { opacity: calc(var(--chapter-photo-opacity, 1) * var(--chapter-edge-opacity, .36)); }
-  27%, 73% { opacity: var(--chapter-photo-opacity, 1); }
 }
 
 @media (721px <= width <= 980px) {
@@ -312,66 +187,7 @@
   .home-craft-copy p { font-size: 15px; line-height: 1.42; }
   .home-craft-product { width: min(72%, 196px); }
   .home-scene h2 { font-size: clamp(40px, 11vw, 68px); }
-
-  .home-scene-photo {
-    --chapter-photo-opacity: .35;
-    --scene-mask: linear-gradient(155deg, transparent 8%, #0004 43%, #000 78%);
-    inset: auto -14% -2% auto;
-    width: min(100%, 560px);
-    height: min(78%, clamp(290px, 111vw, 530px));
-    object-position: left 56%;
-    mask-image: linear-gradient(90deg, transparent, #000 24%), var(--scene-mask), var(--chapter-edge-mask);
-  }
-
-  .home-scene--about .home-scene-copy p { line-height: 1.43; }
-
-  .home .home-scene--perfume {
-    grid-template-rows: auto minmax(250px, 1fr);
-    align-items: stretch;
-    background: linear-gradient(180deg, var(--ink), #141414 76%);
-  }
-
-  .home-scene--perfume .home-scene-photo {
-    position: relative;
-    grid-row: 2;
-    inset: auto;
-    width: 100%;
-    height: 100%;
-    min-height: 0;
-    max-height: 590px;
-    object-position: center bottom;
-    transform: none;
-    mask-image: linear-gradient(180deg, transparent, #000 20%);
-  }
-
-  .home-perfume-content {
-    grid-row: 1;
-    gap: 14px;
-    padding-block: clamp(22px, 4svh, 34px) 6px;
-  }
-
-  .home-perfume-content .home-scene-copy { max-width: 100%; }
-  .home-perfume-content h2 { font-size: clamp(39px, 10.7vw, 66px); }
-  .home-perfume-content .home-scene-copy p { line-height: 1.43; }
-
-  .home-scene-copy p { margin-top: 14px; }
-  .home-scene-copy .action { margin-top: 21px; }
-
-  .home .home-scene--engraving {
-    min-height: calc(var(--chapter-height) * .75);
-  }
-
-  .home-scene--engraving .home-scene-photo {
-    inset: -48% 0 auto;
-    width: 100%;
-    height: 148%;
-    object-position: center 67%;
-    mask-image: none;
-  }
-
-  .home-engraving-background::after {
-    background: linear-gradient(180deg, var(--ink), transparent 17% 28%, #08090a70 49%, #08090a40 78%, var(--ink));
-  }
+  .home-scene-copy p { margin-top: 14px; line-height: 1.43; }
 }
 
 @media (max-width: 380px) and (max-height: 640px) {
@@ -394,9 +210,7 @@
   .hero-caption { margin-top: 10px; }
   .home-workshop > .wrap { padding-block: 14px; }
   .home-workshop h2 { font-size: clamp(30px, 5vw, 42px); }
-  .home-scene-copy { padding-block: clamp(16px, 5svh, 28px); }
-  .home-scene--engraving .home-scene-copy { padding-block: 20px; }
-  .home-scene--engraving h2 { font-size: clamp(34px, 4.6vw, 42px); }
+  .home-scene--about .home-scene-copy { padding-block: clamp(16px, 5svh, 28px); }
 }
 
 @media (max-width: 720px) and (orientation: portrait) {
@@ -410,14 +224,4 @@
   .home .hero-copy {
     padding-bottom: clamp(30px, 6svh, 52px);
   }
-}
-
-@media (max-width: 720px) {
-  .home .site-nav {
-    gap: 8px;
-    padding: 5px 8px 8px;
-  }
-
-  .home .site-nav-links a { min-height: 52px; padding-inline: 12px; font-size: 19px; }
-  .home .site-nav-links a + a { border-block-start-color: var(--line); }
 }

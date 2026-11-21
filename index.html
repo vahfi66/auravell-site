@@ -24,17 +24,17 @@
     <header class="site-header">
       <div class="wrap header-inner">
         <a href="./" class="wordmark" aria-label="Auravell, главная">Auravell</a>
-        <button class="site-menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
-          Меню
-          <span class="site-menu-icon" aria-hidden="true"></span>
+        <button class="site-menu-toggle" type="button" aria-label="Меню" aria-expanded="false" aria-controls="site-nav">
+          <span class="site-menu-icon" aria-hidden="true"><span></span></span>
         </button>
         <nav class="site-nav" id="site-nav" aria-label="Разделы главной" inert>
+          <button class="site-nav-close" type="button" aria-label="Закрыть меню">
+            <span class="site-menu-icon" aria-hidden="true"></span>
+          </button>
           <div class="site-nav-links">
             <a href="#hero">Главная</a>
             <a href="#about">Об Auravell</a>
             <a href="#workshop">Работа мастера</a>
-            <a href="#perfume">Парфюм</a>
-            <a href="#engraving">Гравировка</a>
           </div>
           <a class="action site-nav-cta" href="./catalog.html">Перейти в каталог</a>
         </nav>
@@ -92,33 +92,9 @@
               <p>Мастер вручную формирует и полирует каждую грань алмаза. От точности углов зависит, как бриллиант вспыхивает на свету, когда вы поворачиваете кольцо.</p>
             </article>
           </div>
+          <a class="action action--primary workshop-action" href="./catalog.html?category=Кольца">Посмотреть кольца</a>
         </div>
       </section>
-
-      <section class="home-scene home-scene--perfume" id="perfume" aria-labelledby="perfume-title" tabindex="-1">
-        <img class="home-scene-photo" src="/images/sillage-noir.webp" alt="Чёрный флакон Sillage Noir с серебристой надписью" width="1200" height="900" loading="lazy" decoding="async">
-        <div class="wrap home-perfume-content">
-          <div class="home-scene-copy">
-            <h2 id="perfume-title"><span lang="fr">Sillage Noir</span></h2>
-            <p>Бергамот и чёрный чай, затем ирис и кедр. В шлейфе — ладан и ветивер.</p>
-            <p class="home-scene-detail">Парфюмерная вода · 50 мл</p>
-          </div>
-          <a class="action home-perfume-action" href="./catalog.html#perfume">Посмотреть аромат</a>
-        </div>
-      </section>
-
-      <section class="home-scene home-scene--engraving" id="engraving" aria-labelledby="engraving-title" tabindex="-1">
-        <picture class="home-engraving-background">
-          <source media="(max-width: 720px) and (orientation: portrait)" srcset="/images/engraving-scene-portrait.webp">
-          <img class="home-scene-photo" src="/images/engraving-scene.webp" alt="" width="1672" height="941" loading="lazy" decoding="async">
-        </picture>
-        <div class="wrap home-scene-copy">
-          <h2 id="engraving-title">Гравировка</h2>
-          <p>Добавьте имя или инициалы на кольцо или браслет. Для надписи внутри кольца мастер подбирает размер букв под ширину ободка и располагает их вдоль изгиба.</p>
-          <a class="home-text-link" href="./catalog.html#engraving">Настроить гравировку</a>
-        </div>
-      </section>
-
     </main>
 
     <footer class="site-footer">

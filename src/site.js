@@ -1,5 +1,6 @@
 const menuToggle = document.querySelector('.site-menu-toggle');
 const navigation = document.querySelector('#site-nav');
+const menuClose = navigation.querySelector('.site-nav-close');
 
 const homeHeader = document.querySelector('.home .site-header');
 if (homeHeader) {
@@ -18,13 +19,23 @@ function setMenuOpen(open) {
   navigation.inert = !open;
 }
 
-function closeMenuOutside({ target }) {
-  if (menuIsOpen() && !menuToggle.contains(target) && !navigation.contains(target)) setMenuOpen(false);
+function closeMenuOutside({ target, type }) {
+  if (!menuIsOpen() || menuToggle.contains(target) || navigation.contains(target)) return;
+  if (type === 'click' && navigation.contains(document.activeElement)) dismissMenu();
+  else setMenuOpen(false);
 }
 
 menuToggle.addEventListener('click', () => {
-  setMenuOpen(!menuIsOpen());
+  setMenuOpen(true);
+  menuClose.focus({ preventScroll: true });
 });
+
+function dismissMenu() {
+  setMenuOpen(false);
+  menuToggle.focus({ preventScroll: true });
+}
+
+menuClose.addEventListener('click', dismissMenu);
 navigation.addEventListener('click', (event) => {
   if (event.target.closest('a')) setMenuOpen(false);
 });
@@ -32,8 +43,7 @@ document.addEventListener('click', closeMenuOutside);
 document.addEventListener('focusin', closeMenuOutside);
 document.addEventListener('keydown', (event) => {
   if (event.key !== 'Escape' || !menuIsOpen()) return;
-  setMenuOpen(false);
-  menuToggle.focus({ preventScroll: true });
+  dismissMenu();
 });
 
 let touchPress;
