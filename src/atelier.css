@@ -18,13 +18,12 @@
   border-radius: var(--facet-corners);
 }
 
-:is(.cart-button, .site-menu-toggle) {
+.cart-button {
   border: 1px solid var(--facet-edge);
   border-radius: var(--facet-corners);
 }
 .cart-button { padding-inline: 11px; }
 .cart-button:is(:active, [data-touch-pressed]),
-.site-menu-toggle:is(:active, [data-touch-pressed], [aria-expanded="true"]),
 .engraving-choices label:active { background-color: #272a2d; }
 
 :is(.action--primary, .product-detail-buy, .commerce-primary):is(:active, [data-touch-pressed]) {
@@ -184,7 +183,7 @@
     background: linear-gradient(110deg, #faf9f6, #e4e7eb 54%, #f2f1ee);
     color: #08090a;
   }
-  :is(.cart-button, .site-menu-toggle):hover { border-color: var(--muted); }
+  .cart-button:hover { border-color: var(--muted); }
   .catalog-home-link:hover { background-color: #1d1f22; }
   .engraving-choices label:hover { border-color: var(--facet-edge); }
 }

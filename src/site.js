@@ -1,14 +1,10 @@
 const menuToggle = document.querySelector('.site-menu-toggle');
 const navigation = document.querySelector('#site-nav');
-const menuClose = navigation.querySelector('.site-nav-close');
-
-const homeHeader = document.querySelector('.home .site-header');
-if (homeHeader) {
-  const updateHeader = () => homeHeader.toggleAttribute('data-scrolled', window.scrollY > 16);
-  window.addEventListener('scroll', updateHeader, { passive: true });
-  window.addEventListener('pageshow', updateHeader);
-  updateHeader();
-}
+const header = document.querySelector('.site-header');
+const updateHeader = () => header.toggleAttribute('data-scrolled', window.scrollY > 16);
+window.addEventListener('scroll', updateHeader, { passive: true });
+window.addEventListener('pageshow', updateHeader);
+updateHeader();
 
 function menuIsOpen() {
   return menuToggle.getAttribute('aria-expanded') === 'true';
@@ -26,8 +22,7 @@ function closeMenuOutside({ target, type }) {
 }
 
 menuToggle.addEventListener('click', () => {
-  setMenuOpen(true);
-  menuClose.focus({ preventScroll: true });
+  setMenuOpen(!menuIsOpen());
 });
 
 function dismissMenu() {
@@ -35,7 +30,6 @@ function dismissMenu() {
   menuToggle.focus({ preventScroll: true });
 }
 
-menuClose.addEventListener('click', dismissMenu);
 navigation.addEventListener('click', (event) => {
   if (event.target.closest('a')) setMenuOpen(false);
 });

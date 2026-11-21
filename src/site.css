@@ -113,7 +113,7 @@ svg { display: block; flex: 0 0 auto; }
 
 .site-header::after {
   position: fixed;
-  inset: 0;
+  inset: var(--header-height) 0 0;
   z-index: -1;
   background: #05060994;
   opacity: 0;
@@ -145,81 +145,80 @@ svg { display: block; flex: 0 0 auto; }
   text-decoration: none;
 }
 
-:is(.site-menu-toggle, .site-nav-close) {
+.site-menu-toggle {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   min-width: 48px;
   min-height: 44px;
   padding-inline: 13px;
-  background: #10121666;
-  font-size: 14px;
-  font-weight: 500;
-  transition: background-color 140ms ease, transform 130ms var(--ease-out);
-}
-
-:is(.site-menu-toggle, .site-nav-close):is(:active, [data-touch-pressed]) {
-  background-color: #272a2d;
+  border: 0;
+  background: transparent;
+  color: white;
+  transition: transform 130ms var(--ease-out);
 }
 
 .site-menu-icon {
   position: relative;
   flex: 0 0 20px;
   height: 14px;
+  opacity: .65;
+  transition: opacity 240ms ease;
 }
 
-.site-menu-icon::before, .site-menu-icon::after, .site-menu-icon > span {
+.site-header[data-scrolled] .site-menu-icon,
+.site-menu-toggle:is(:focus-visible, :active, [data-touch-pressed], [aria-expanded="true"]) .site-menu-icon {
+  opacity: 1;
+}
+
+.site-menu-icon::before, .site-menu-icon::after {
   position: absolute;
   inset: 6px 0 auto;
   height: 1px;
   background: currentColor;
   content: '';
+  transition: transform 180ms var(--ease-out);
 }
 
-.site-menu-icon::before { transform: translateY(-5px); }
-.site-menu-icon::after { transform: translateY(5px); }
-.site-nav-close .site-menu-icon::before { transform: rotate(45deg); }
-.site-nav-close .site-menu-icon::after { transform: rotate(-45deg); }
-
-.site-nav-close {
-  justify-self: end;
-  border: 1px solid var(--facet-edge);
-  border-radius: var(--facet-corners);
-}
+.site-menu-icon::before { transform: translateY(-3px); }
+.site-menu-icon::after { transform: translateY(3px); }
+.site-menu-toggle[aria-expanded="true"] .site-menu-icon::before { transform: rotate(45deg); }
+.site-menu-toggle[aria-expanded="true"] .site-menu-icon::after { transform: rotate(-45deg); }
 
 .site-nav {
   position: fixed;
   z-index: 1;
-  inset: 0 0 auto auto;
+  inset: var(--header-height) 0 auto;
   display: grid;
-  grid-template-rows: auto minmax(0, 1fr) auto;
-  gap: clamp(14px, 4vh, 38px);
-  width: min(440px, 100%);
-  height: 100dvh;
-  padding: max(12px, env(safe-area-inset-top)) max(24px, env(safe-area-inset-right))
-    max(22px, env(safe-area-inset-bottom)) max(24px, env(safe-area-inset-left));
-  border-radius: 18px 0 0 18px;
+  grid-template-columns: minmax(0, 420px);
+  justify-content: center;
+  gap: 12px;
+  max-height: calc(100dvh - var(--header-height));
+  padding: 10px var(--gutter) 22px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
   background: #0c0e11;
   box-shadow: 0 16px 40px #0008;
   visibility: hidden;
-  translate: 100% 0;
+  clip-path: inset(0 0 100%);
   pointer-events: none;
-  transition: translate 250ms var(--ease-out), visibility 0s 250ms;
+  transition: clip-path 200ms var(--ease-out), visibility 0s 200ms;
 }
 
 .site-menu-toggle[aria-expanded="true"] + .site-nav {
   visibility: visible;
-  translate: none;
+  clip-path: inset(0);
   pointer-events: auto;
   transition-delay: 0s;
-  transition-duration: 320ms, 0s;
+  transition-duration: 270ms, 0s;
 }
 
 .site-nav-links {
-  min-height: 0;
-  overflow-y: auto;
-  overscroll-behavior: contain;
+  translate: 0 -10px;
+  transition: translate 240ms var(--ease-out);
 }
+
+.site-menu-toggle[aria-expanded="true"] + .site-nav .site-nav-links { translate: none; }
 
 .site-nav-links a {
   display: flex;
@@ -386,7 +385,7 @@ svg { display: block; flex: 0 0 auto; }
 .back-to-top { justify-self: end; }
 
 @media (hover: hover) and (pointer: fine) {
-  .site-nav-close:hover { border-color: var(--muted); }
+  .site-menu-toggle:hover .site-menu-icon { opacity: 1; }
   .site-nav-links a:hover { background: #1c2024; }
   .site-nav-cta:hover { background: #eceef0; }
   .back-to-top:hover { color: var(--paper); }
