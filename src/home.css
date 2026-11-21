@@ -84,12 +84,6 @@
   gap: clamp(26px, 6vw, 90px);
 }
 
-.workshop-action {
-  display: flex;
-  width: fit-content;
-  margin: clamp(22px, 4svh, 40px) auto 0;
-}
-
 .home-craft-copy { display: grid; align-content: start; }
 
 .home-craft-product {
@@ -164,6 +158,12 @@
   font-size: 14px;
   font-weight: 600;
   text-decoration: none;
+}
+
+.home-text-link.workshop-action {
+  display: flex;
+  width: fit-content;
+  margin: clamp(22px, 4svh, 40px) auto 0;
 }
 
 @media (721px <= width <= 980px) {
