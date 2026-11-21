@@ -1,5 +1,14 @@
 const menuToggle = document.querySelector('.site-menu-toggle');
 const navigation = document.querySelector('#site-nav');
+
+const homeHeader = document.querySelector('.home .site-header');
+if (homeHeader) {
+  const updateHeader = () => homeHeader.toggleAttribute('data-scrolled', window.scrollY > 16);
+  window.addEventListener('scroll', updateHeader, { passive: true });
+  window.addEventListener('pageshow', updateHeader);
+  updateHeader();
+}
+
 function menuIsOpen() {
   return menuToggle.getAttribute('aria-expanded') === 'true';
 }
@@ -13,8 +22,7 @@ function closeMenuOutside({ target }) {
   if (menuIsOpen() && !menuToggle.contains(target) && !navigation.contains(target)) setMenuOpen(false);
 }
 
-menuToggle.addEventListener('click', (event) => {
-  menuToggle.toggleAttribute('data-menu-instant', event.detail === 0);
+menuToggle.addEventListener('click', () => {
   setMenuOpen(!menuIsOpen());
 });
 navigation.addEventListener('click', (event) => {

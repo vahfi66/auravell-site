@@ -1,5 +1,15 @@
 .home { --chapter-height: calc(100svh - var(--header-height)); }
 .home .header-inner { grid-template-columns: 1fr auto; }
+.home .site-header {
+  margin-block-end: calc(-1 * var(--header-height));
+  background: transparent;
+  border-color: transparent;
+  transition: background-color 240ms ease, border-color 240ms ease;
+}
+.home .site-header:is([data-scrolled], :has(.site-menu-toggle[aria-expanded="true"])) {
+  background: var(--ink);
+  border-color: #242527;
+}
 
 .home .site-menu-toggle { gap: 10px; }
 .home .site-menu-icon {
@@ -30,6 +40,11 @@
 .home :is(.hero, .home-workshop, .home-scene) {
   min-height: var(--chapter-height);
   background: var(--ink);
+}
+
+.home .hero {
+  min-height: 100svh;
+  padding-block-start: var(--header-height);
 }
 
 .home main > section + section { border-block-start: 1px solid #ffffff14; }
@@ -385,6 +400,9 @@
 }
 
 @media (max-width: 720px) and (orientation: portrait) {
+  .home .hero-visual {
+    margin-block-start: calc(-1 * var(--header-height));
+  }
   .home .hero-visual::after {
     height: 18%;
   }
@@ -396,12 +414,8 @@
 
 @media (max-width: 720px) {
   .home .site-nav {
-    inset-block-start: calc(100% + 6px);
     gap: 8px;
     padding: 5px 8px 8px;
-    border-color: var(--line);
-    background: var(--surface);
-    box-shadow: 0 9px 18px #0007;
   }
 
   .home .site-nav-links a { min-height: 52px; padding-inline: 12px; font-size: 19px; }
