@@ -492,6 +492,11 @@ svg { display: block; flex: 0 0 auto; }
   .hero-action { margin-top: 16px; }
 }
 
+[data-scroll-reveal]:is(:focus-visible, :has(:focus-visible)) {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0s !important;

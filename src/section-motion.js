@@ -5,16 +5,15 @@ gsap.registerPlugin(ScrollTrigger);
 
 gsap.matchMedia().add('(prefers-reduced-motion: no-preference)', () => {
   for (const content of document.querySelectorAll('[data-scroll-reveal]')) {
-    gsap.fromTo(content, { y: 12, opacity: 0.88 }, {
+    gsap.fromTo(content, { y: 26, opacity: 0 }, {
       y: 0,
       opacity: 1,
-      ease: 'power1.out',
+      duration: 0.7,
+      ease: 'power3.out',
       clearProps: 'transform,opacity',
       scrollTrigger: {
         trigger: content,
-        start: 'top bottom',
-        end: () => `+=${Math.min(160, window.innerHeight * 0.24)}`,
-        scrub: true,
+        start: 'top 92%',
         once: true,
       },
     });
